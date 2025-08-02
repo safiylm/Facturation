@@ -1,0 +1,30 @@
+
+<div class="div-title d-flex align-items-center justify-content-between">
+  <h1>Mes factures</h1>
+  <a href="/new-facture" id="a-add-new-facture">Créer une nouvelle facture</a>
+
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">CLIENT</th>
+      <th scope="col">TITRE</th>
+      <th scope="col">TOTAL TVA </th>
+      <th scope="col">TOTAL HT</th>
+      <th scope="col">DATE DE CREATION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cli of liste">
+      <td><a href="edit-client/{{cli.id}}"> {{ cli['clientId'] }} </a> </td>
+      <td> {{ cli.titre }} </td>
+      <td> {{ cli.totalTVA }} </td>
+      <td> {{ cli.totalHT }} </td>
+      <td> {{ cli.createdAt }} </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<pre>{{ liste | json }}</pre>

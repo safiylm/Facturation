@@ -1,0 +1,29 @@
+<h1>Création de facture</h1>
+
+<div *ngIf="clientId=='' ">
+
+  <h2>Etape 1: Creer un Client ou Choisissez :</h2>
+  <button class="btn btn-light" (click)="clientchoix='create'">Créer un nouveau client</button>
+  <button class="btn btn-light" (click)="clientchoix='select'">Choisir un client</button>
+
+  <app-create-client *ngIf="clientchoix=='create'" (newItemEvent)="addItem($event)"></app-create-client>
+  <app-select-client *ngIf="clientchoix=='select'"></app-select-client>
+
+</div>
+
+<div *ngIf="clientId!=''" id="div-informative-client-is-created">
+  <h2 class="etape-reussi" *ngIf="clientchoix=='create'">Etape 1 ✅: Client est crée  </h2>
+  <h2 class="etape-reussi" *ngIf="clientchoix=='select'">Etape 1 ✅: Client est selectionné </h2>
+  <h2>Etape 2 : Vos produits </h2>
+</div>
+
+<div id="facture" *ngIf="clientId!=''" >
+  <div class="d-flex align-items-center justify-content-between">
+    <app-detail-client [id]="clientId"></app-detail-client>
+    <app-detail-client [id]="clientId"></app-detail-client>
+  </div>
+
+  <app-gestion-produits></app-gestion-produits>
+
+</div>
+

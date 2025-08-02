@@ -1,0 +1,23 @@
+<form (ngSubmit)="login()" autocomplete="off">
+  <h1>Login </h1>
+
+  <label>
+    Saisissez votre email:<br />
+    <input type="email" name="email" class="form-control" [(ngModel)]="email" />
+  </label>
+  <label>
+    Saisissez votre mot de passe:<br />
+    <input type="password" name="password" class="form-control" [(ngModel)]="password" />
+  </label>
+
+  <button type="submit" class="btn btn-primary">Se Connecter </button>
+
+  <a href='/register'>Pas de compte?</a>
+</form>
+<div *ngFor="let cli of liste">
+
+    <a href="edit-user/{{cli.id}}"> {{ cli['nom'] }} </a>
+  </div>
+
+
+<pre>{{ liste | json }}</pre>

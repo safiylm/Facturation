@@ -1,0 +1,34 @@
+<form (ngSubmit)="register()" autocomplete="off">
+  <h1>Register </h1>
+
+  <label>
+    Saisissez votre nom:<br />
+    <input type="text" name="nom" class="form-control" [(ngModel)]="user.Nom">
+  </label>
+
+  <label>
+    Saisissez votre prenom:<br />
+    <input type="text" name="prenom" class="form-control" [(ngModel)]="user.Prenom">
+  </label>
+
+  <label>
+    Saisissez votre email:<br />
+    <input type="email" name="email" class="form-control" [(ngModel)]="user.Email">
+  </label>
+  <label>
+    Saisissez votre mot de passe:<br />
+    <input type="password" name="password" class="form-control" [(ngModel)]="user.Password">
+  </label>
+  <label>
+    Saisissez votre mot de passe:<br />
+    <input type="text" name="adresse" class="form-control" [(ngModel)]="user.Adresse">
+  </label>
+
+  <label>
+    Saisissez votre numero de téléphone:<br />
+    <input type="number" name="phone" class="form-control" [(ngModel)]="user.Phone">
+  </label>
+
+
+  <button type="submit" class="btn btn-primary">S'inscrire </button>
+</form>

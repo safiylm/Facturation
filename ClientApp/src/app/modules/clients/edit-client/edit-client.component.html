@@ -1,0 +1,34 @@
+<form (ngSubmit)="edit()" autocomplete="off" *ngIf="client">
+  <h1>Edit Client  </h1>
+
+  <label>
+    Saisissez le nom :<br />
+    <input type="text" name="nom" class="form-control" [(ngModel)]="client.nom" />
+  </label>
+
+  <label>
+    Saisissez le prenom :<br />
+    <input type="text" name="prenom" class="form-control" [(ngModel)]="client.prenom" />
+  </label>
+
+  <label>
+    Saisissez le email:<br />
+    <input type="email" name="email" class="form-control" [(ngModel)]="client.email" />
+  </label>
+
+  <label>
+    Saisissez le numéro de téléphone:<br />
+    <input type="text" name="phone" class="form-control" [(ngModel)]="client.phone" />
+  </label>
+
+  <label>
+    Saisissez l'adresse:<br />
+    <input type="text" name="adresse" class="form-control" [(ngModel)]="client.adresse" />
+  </label>
+
+  <button type="submit" class="btn btn-primary">Edit </button>
+
+</form>
+
+
+<button (click)="delete()" class="btn btn-danger">Delete</button>

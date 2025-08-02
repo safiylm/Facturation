@@ -1,0 +1,165 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Facturation.Data;
+using Facturation.Models;
+
+namespace Facturation.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ProduitsController : Controller
+    {
+        private readonly FacturationContext _context;
+
+        public ProduitsController(FacturationContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Produits
+        public async Task<IActionResult> Index()
+        {
+              return _context.Produit != null ? 
+                          View(await _context.Produit.ToListAsync()) :
+                          Problem("Entity set 'FacturationContext.ProduitModel'  is null.");
+        }
+
+        // GET: Produits/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Produit == null)
+            {
+                return NotFound();
+            }
+
+            var produitModel = await _context.Produit
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (produitModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(produitModel);
+        }
+
+        // GET: Produits/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Produits/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Quantite,Designation,PrixUnitaireHT,FactureId,TVA,CreatedAt")] ProduitModel produitModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(produitModel);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(produitModel);
+        }
+
+        // GET: Produits/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Produit == null)
+            {
+                return NotFound();
+            }
+
+            var produitModel = await _context.Produit.FindAsync(id);
+            if (produitModel == null)
+            {
+                return NotFound();
+            }
+            return View(produitModel);
+        }
+
+        // POST: Produits/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Quantite,Designation,PrixUnitaireHT,FactureId,TVA,CreatedAt")] ProduitModel produitModel)
+        {
+            if (id != produitModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(produitModel);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProduitModelExists(produitModel.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(produitModel);
+        }
+
+        // GET: Produits/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.Produit == null)
+            {
+                return NotFound();
+            }
+
+            var produitModel = await _context.Produit
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (produitModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(produitModel);
+        }
+
+        // POST: Produits/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.Produit == null)
+            {
+                return Problem("Entity set 'FacturationContext.ProduitModel'  is null.");
+            }
+            var produitModel = await _context.Produit.FindAsync(id);
+            if (produitModel != null)
+            {
+                _context.Produit.Remove(produitModel);
+            }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ProduitModelExists(int id)
+        {
+          return (_context.Produit?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+    }
+}

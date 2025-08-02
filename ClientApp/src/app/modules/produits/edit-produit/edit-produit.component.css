@@ -1,0 +1,8 @@
+
+td{
+    min-width:120px;
+}
+
+tr:first-child {
+  min-width: 170px;
+}

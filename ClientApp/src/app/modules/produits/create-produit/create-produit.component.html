@@ -1,0 +1,18 @@
+    <tr>
+      <td>
+        <input type="text" name="designation" class="form-control" [(ngModel)]="produit.designation" />
+      </td>
+      <td>
+        <input type="number" name="quantite" class="form-control" [(ngModel)]="produit.quantite" />
+      </td>
+      <td>
+        <input type="number" name="prixUnitaireHT" class="form-control" [(ngModel)]="produit.prixUnitaireHT" />
+      </td>
+      <td>
+        <input type="number" name="TVA" class="form-control" [(ngModel)]="produit.TVA" />
+      </td>
+      <td>
+        <button type="submit" class="btn btn-primary" (click)="addNewItem()">Ajouter </button>
+      </td>
+
+    </tr>

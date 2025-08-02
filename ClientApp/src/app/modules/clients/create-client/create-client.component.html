@@ -1,0 +1,52 @@
+<button class="btn btn-light" (click)="addNewItem('2')">clic clic</button>
+
+<div class="div-spinner" *ngIf="resultat!=''" @fadeIn @fadeOut>
+
+  <div *ngIf="resultat=='chargement'" class="d-flex align-items-center justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+    Chargement de la création du client
+  </div>
+
+  <div *ngIf="resultat=='ok'" class="d-flex align-items-center justify-content-center">
+    Création du client avec succès ✅
+  </div>
+
+</div>
+
+
+<form (ngSubmit)="create()" autocomplete="off">
+  <h1>New Client  </h1>
+
+  <label>
+    Saisissez le nom :<br />
+    <input type="text" name="nom" class="form-control" [(ngModel)]="client.Nom" />
+  </label>
+
+  <label>
+    Saisissez le prenom :<br />
+    <input type="text" name="prenom" class="form-control" [(ngModel)]="client.Prenom" />
+  </label>
+
+  <label>
+    Saisissez le email:<br />
+    <input type="email" name="email" class="form-control" [(ngModel)]="client.Email" />
+  </label>
+
+  <label>
+    Saisissez le numéro de téléphone:<br />
+    <input type="text" name="phone" class="form-control" [(ngModel)]="client.Phone" />
+  </label>
+
+  <label>
+    Saisissez l'adresse:<br />
+    <input type="text" name="adresse" class="form-control" [(ngModel)]="client.Adresse" />
+  </label>
+
+  <button type="submit" class="btn btn-primary">Ajouter </button>
+
+</form>
+
+<p>{{ resultat }}</p>
+

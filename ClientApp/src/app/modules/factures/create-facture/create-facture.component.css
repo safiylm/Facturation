@@ -1,0 +1,27 @@
+h1 {
+  background-color: blueviolet;
+  display: block;
+  padding: 30px;
+  text-align: center;
+  color: white;
+  font-size: #431370;
+}
+
+
+#facture{
+    padding:65px 55px;
+    max-width:800px;
+    height:1500px;
+    border :0.2px solid black;
+    margin:20px auto;
+}
+
+h2 {
+  font-size: 22px;
+  margin: 25px 0;
+  padding: 10px;
+}
+
+.etape-reussi {
+  border-bottom: 2px solid green;
+}
