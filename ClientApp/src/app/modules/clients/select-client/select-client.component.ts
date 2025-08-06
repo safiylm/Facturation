@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ClientService } from '../../../core/client-service';
 import { Client } from '../../../models/client.model';
 
@@ -10,9 +10,12 @@ import { Client } from '../../../models/client.model';
 export class SelectClientComponent implements OnInit {
 
   constructor(private clientService: ClientService) { }
+  @Output() createEvent = new EventEmitter<any>();
+  @Output() getClientIDEvent = new EventEmitter<number>();
 
   liste !: Client[];
   resultat = "";
+  clientSelect = 0;
 
   ngOnInit(): void {
 
@@ -20,4 +23,24 @@ export class SelectClientComponent implements OnInit {
       this.liste = clients;
     });
   }
+
+  openCreateForm() {
+    this.createEvent.emit('create');
+  }
+
+
+  addNewItem() {
+
+    this.resultat = "chargement"
+    setTimeout(() => {
+      this.resultat = "ok"
+
+    }, 2000)
+
+    setTimeout(() => {
+      this.resultat = ""
+      this.getClientIDEvent.emit(this.clientSelect);
+    }, 4000)
+  }
+
 }

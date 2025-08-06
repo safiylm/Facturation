@@ -1,0 +1,26 @@
+#btnOpenCreateForm {
+  display: inline-block;
+  text-align: right;
+  padding: 5px 10px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  border:none;
+}
+
+.div-spinner {
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 200px;
+  background-color: white;
+  text-align: center;
+  line-height: 200px;
+}
+
+.spinner-border {
+  margin: 15px;
+}

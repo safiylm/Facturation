@@ -1,17 +1,36 @@
-<p>select-client works!</p>
+
+<div class="div-spinner" *ngIf="resultat!=''" >
+
+  <div *ngIf="resultat=='chargement'" class="d-flex align-items-center justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+    Chargement de la selection du client
+  </div>
+
+  <div *ngIf="resultat=='ok'" class="d-flex align-items-center justify-content-center">
+    Selection du client avec succès ✅
+  </div>
+
+</div>
 
 <table class="table">
   <thead>
     <tr>
+      <th scope="col"></th>
       <th scope="col">NOM</th>
       <th scope="col">PRENOM</th>
       <th scope="col">EMAIL @</th>
       <th scope="col">PHONE</th>
       <th scope="col">ADRESSE</th>
+      <th scope="col"><button id="btnOpenCreateForm" (click)="openCreateForm()">Créer un nouveau client </button></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let cli of liste">
+      <td>
+        <input class="form-check-input" type="radio" name="clientSelect" [(ngModel)]="clientSelect" id="radio{{cli.id}}" value={{cli.id}}>
+      </td>
       <td><a href="edit-client/{{cli.id}}"> {{ cli['nom'] }} </a> </td>
       <td> {{ cli.prenom }} </td>
       <td> {{ cli.email }} </td>
@@ -22,4 +41,4 @@
   </tbody>
 </table>
 
-<pre>{{ liste | json }}</pre>
+<button class="btn btn-light" (click)="addNewItem()">Choisir</button>
