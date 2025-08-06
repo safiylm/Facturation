@@ -17,11 +17,13 @@
   </thead>
   <tbody>
     <tr *ngFor="let cli of liste">
-      <td><a href="edit-client/{{cli.id}}"> {{ cli['clientId'] }} </a> </td>
+      <td> <app-nom-client [id]="cli.clientId"></app-nom-client> </td>
       <td> {{ cli.titre }} </td>
       <td> {{ cli.totalTVA }} </td>
       <td> {{ cli.totalHT }} </td>
       <td> {{ cli.createdAt }} </td>
+      <td><a href="facture/{{cli.id}}">Aperçu </a> </td>
+      <td><a href="edit-facture/{{cli.id}}">Edit </a> </td>
     </tr>
 
   </tbody>

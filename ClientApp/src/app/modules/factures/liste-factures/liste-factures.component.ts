@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientService } from '../../../core/client-service';
 import { FactureService } from '../../../core/facture-service';
 import { Facture } from '../../../models/facture.model';
 
@@ -12,7 +13,7 @@ export class ListeFacturesComponent implements OnInit {
 
   liste !: Facture[];
   resultat = "";
-
+  
   constructor(private factureService: FactureService) { }
 
   ngOnInit(): void {
@@ -20,6 +21,8 @@ export class ListeFacturesComponent implements OnInit {
     this.factureService.getFactures().subscribe((fac) => {
       this.liste = fac;
     });
+
+
   }
 
 
