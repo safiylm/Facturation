@@ -1,0 +1,23 @@
+<div id="facture" *ngIf="facture">
+  <div class="d-flex align-items-center justify-content-between">
+    <app-detail-client [id]="facture.clientId"></app-detail-client>
+    <app-detail-client [id]="facture.clientId"></app-detail-client>
+  </div>
+
+  <div class="facturetitre">
+    <div>{{ facture.titre }} </div>
+    <div>{{ facture.informations }} </div>
+  </div>
+
+  <app-liste-produits [id]="facture.id"></app-liste-produits>
+
+  <div class="total">
+    <div>Total TVA : {{ facture.totalTVA}}€ </div>
+    <div>Total HT : {{ facture.totalHT }}€</div>
+    <div>Total TTC : {{ facture.totalHT + facture.totalTVA}}€</div>
+
+  </div>
+
+
+</div>
+
