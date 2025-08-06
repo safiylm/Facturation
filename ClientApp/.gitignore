@@ -5,7 +5,7 @@
 /dist-server
 /tmp
 /out-tsc
-/ClientApp/.angular
+ClientApp/.angular
 # dependencies
 /node_modules
 
