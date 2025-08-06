@@ -16,6 +16,7 @@ export class CreateFactureComponent implements OnInit {
   clientchoix ="select"
   clientId = 0
   formProduitIsSubmit = false;
+  currentDate = new Date();
 
   ngOnInit(): void {
   }

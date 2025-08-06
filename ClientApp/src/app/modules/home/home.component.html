@@ -1,3 +1,13 @@
 
-<app-liste-factures></app-liste-factures>
-<app-liste-clients></app-liste-clients>
+<div class="d-flex">
+  <ul>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#factures">Factures</a></li>
+    <li><a href="#clients">Clients</a></li>
+  </ul>
+
+  <div class="home">
+    <app-liste-factures id="factures"></app-liste-factures>
+    <app-liste-clients id="clients"></app-liste-clients>
+  </div>
+</div>

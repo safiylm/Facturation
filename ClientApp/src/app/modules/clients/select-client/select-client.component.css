@@ -1,11 +1,13 @@
 #btnOpenCreateForm {
   display: inline-block;
   text-align: right;
-  padding: 5px 10px;
-  background-color: blueviolet;
+  border: none;
+  margin:  0;
+  padding: 8px 16px;
+  background-color: #366fed;
   color: white;
   border-radius: 5px;
-  border:none;
+  text-decoration: none;
 }
 
 .div-spinner {
@@ -24,3 +26,26 @@
 .spinner-border {
   margin: 15px;
 }
+
+
+.div-table {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+  .div-table th {
+    color: #737b8f;
+    font-weight: 500;
+  }
+
+  td{
+      padding: 13px;
+    
+  }
+
+
+  button{
+      display:block;
+      margin: 10px auto;
+  }

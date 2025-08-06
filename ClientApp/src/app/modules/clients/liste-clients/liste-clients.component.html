@@ -4,26 +4,27 @@
   <a href="/new-client" id="a-add-new-client">Créer une nouvelle client</a>
 
 </div>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">NOM</th>
-      <th scope="col">PRENOM</th>
-      <th scope="col">EMAIL @</th>
-      <th scope="col">PHONE</th>
-      <th scope="col">ADRESSE</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cli of liste">
-      <td><a href="edit-client/{{cli.id}}"> {{ cli['nom'] }} </a> </td>
-      <td> {{ cli.prenom }} </td>
-      <td> {{ cli.email }} </td>
-      <td> {{ cli.phone }} </td>
-      <td> {{ cli.adresse }} </td>
-    </tr>
+<div class="div-table">
 
-  </tbody>
-</table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Email @</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Adresse</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cli of liste">
+        <td><a href="edit-client/{{cli.id}}"> {{ cli['nom'] }} {{ cli.prenom }}</a> </td>
+        <td> {{ cli.email }} </td>
+        <td> {{ cli.phone }} </td>
+        <td> {{ cli.adresse }} </td>
+      </tr>
 
-<pre>{{ liste | json }}</pre>
+    </tbody>
+  </table>
+  </div>
+
+<!--<pre>{{ liste | json }}</pre>-->

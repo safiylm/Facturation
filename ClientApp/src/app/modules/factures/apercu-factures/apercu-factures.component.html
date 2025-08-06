@@ -1,13 +1,18 @@
 <div id="facture" *ngIf="facture">
-  <div class="d-flex align-items-center justify-content-between">
+  <div class="facture-top d-flex align-items-center justify-content-between">
     <app-detail-client [id]="facture.clientId"></app-detail-client>
-    <app-detail-client [id]="facture.clientId"></app-detail-client>
+
+    <div>
+      <h1>FACTURE</h1>
+      <p>N° : 000{{facture.id}}</p>
+      <p>Date: {{facture.createdAt  | date: 'dd/MM/yyyy'}}</p>
+    </div>
   </div>
 
-  <div class="facturetitre">
+  <!--<div class="facturetitre">
     <div>{{ facture.titre }} </div>
     <div>{{ facture.informations }} </div>
-  </div>
+  </div>-->
 
   <app-liste-produits [id]="facture.id"></app-liste-produits>
 
@@ -20,4 +25,8 @@
 
 
 </div>
+
+<a href="edit-facture/{{facture.id}}">Edit </a>
+<button class="btn btn-primary">Télécharger </button>
+
 

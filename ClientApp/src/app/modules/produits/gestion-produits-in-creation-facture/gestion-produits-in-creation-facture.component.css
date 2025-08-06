@@ -3,6 +3,18 @@ th {
 }
 
 button{
-    margin:100px auto;
+    margin: 20px auto;
     display:block;
 }
+
+
+.div-table {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+  .div-table th {
+    color: #737b8f;
+    font-weight: 500;
+  }

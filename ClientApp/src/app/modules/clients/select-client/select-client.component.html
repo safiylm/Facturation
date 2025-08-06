@@ -14,31 +14,32 @@
 
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">NOM</th>
-      <th scope="col">PRENOM</th>
-      <th scope="col">EMAIL @</th>
-      <th scope="col">PHONE</th>
-      <th scope="col">ADRESSE</th>
-      <th scope="col"><button id="btnOpenCreateForm" (click)="openCreateForm()">Créer un nouveau client </button></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cli of liste">
-      <td>
-        <input class="form-check-input" type="radio" name="clientSelect" [(ngModel)]="clientSelect" id="radio{{cli.id}}" value={{cli.id}}>
-      </td>
-      <td><a href="edit-client/{{cli.id}}"> {{ cli['nom'] }} </a> </td>
-      <td> {{ cli.prenom }} </td>
-      <td> {{ cli.email }} </td>
-      <td> {{ cli.phone }} </td>
-      <td> {{ cli.adresse }} </td>
-    </tr>
+<div class="div-table">
 
-  </tbody>
-</table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th scope="col">Nom</th>
+        <th scope="col">Email @</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Adresse</th>
+        <th scope="col"><button id="btnOpenCreateForm" (click)="openCreateForm()">Créer </button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cli of liste">
+        <td>
+          <input class="form-check-input" type="radio" name="clientSelect" [(ngModel)]="clientSelect" id="radio{{cli.id}}" value={{cli.id}}>
+        </td>
+        <td><a href="edit-client/{{cli.id}}"> {{ cli['nom'] }} {{ cli.prenom }} </a> </td>
+        <td> {{ cli.email }} </td>
+        <td> {{ cli.phone }} </td>
+        <td> {{ cli.adresse }} </td>
+      </tr>
 
-<button class="btn btn-light" (click)="addNewItem()">Choisir</button>
+    </tbody>
+  </table>
+  <button class="btn btn-light" (click)="addNewItem()">Choisir</button>
+
+</div>

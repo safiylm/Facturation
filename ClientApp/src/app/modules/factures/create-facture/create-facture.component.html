@@ -1,18 +1,22 @@
 <h1>Création de facture</h1>
 
-<div *ngIf="clientId==0 ">
+<div class="progress-bar-etape d-flex justify-content-between">
+  <div *ngIf="clientId==0 ">Créer ou Selectionner un Client</div>
+  <div class="etape-reussi" *ngIf=" clientId!=0 && clientchoix=='create'">Etape 1 ✅: Client est crée  </div>
+  <div class="etape-reussi" *ngIf=" clientId!=0 && clientchoix=='select'">Etape 1 ✅: Client est selectionné </div>
 
-  <h2>Etape 1: Creer un Client ou Choisissez :</h2>
+  <div *ngIf=" clientId!=0  && !formProduitIsSubmit">Etape 2: Créer vos produits</div>
+  <div class="etape-reussi" *ngIf=" clientId!=0 && formProduitIsSubmit">Etape 2 ✅: Vos produits sont crées</div>
+
+  <div *ngIf="clientId!=0 && formProduitIsSubmit ">Etape 3:Enregistrer votre facture</div>
+</div>
+
+<div *ngIf="clientId==0 ">
   <app-create-client (selectEvent)="openSelectForm()" *ngIf="clientchoix=='create'" (getClientIDEvent)="getClientId($event)"></app-create-client>
   <app-select-client (createEvent)="openCreateForm()" *ngIf="clientchoix=='select'" (getClientIDEvent)="getClientId($event)"></app-select-client>
-
 </div>
 
-<div *ngIf="clientId!=0" id="div-informative-client-is-created">
-  <h2 class="etape-reussi" *ngIf="clientchoix=='create'">Etape 1 ✅: Client est crée  </h2>
-  <h2 class="etape-reussi" *ngIf="clientchoix=='select'">Etape 1 ✅: Client est selectionné </h2>
-  <h2>Etape 2 : Vos produits </h2>
-</div>
+
 
 <div *ngIf="!formProduitIsSubmit">
   <app-gestion-produits-in-creation-facture *ngIf="clientId!=0" (createFactureEvent)="getProduits($event)">
@@ -23,29 +27,33 @@
 
   <div class="d-flex factureTop align-items-center justify-content-between">
     <app-detail-client [id]="clientId"></app-detail-client>
-    <app-detail-client [id]="clientId"></app-detail-client>
+    <div>
+      <h2>FACTURE</h2>
+      <p>N° : 000X</p>
+      <p>Date: {{currentDate  | date: 'dd/MM/yyyy'}}</p>
+    </div>
   </div>
 
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">DESIGNATION</th>
-        <th scope="col">QUANTITE</th>
-        <th scope="col">PRIX UNITAIRE </th>
-        <th scope="col">TVA</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let produit of listeProduits">
-        <td> {{ produit.designation }} </td>
-        <td> {{ produit.quantite }} </td>
-        <td> {{ produit.prixUnitaireHT }} </td>
-        <td> {{ produit['tva'] }} </td>
-      </tr>
-    </tbody>
-  </table>
-
+  <div class="div-table">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Designation</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Totol TTC</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produit of listeProduits">
+          <td> {{ produit.designation }} </td>
+          <td> {{ produit.quantite }} </td>
+          <td> {{ produit.prixUnitaireHT }} </td>
+          <td> {{ produit['tva'] }} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <label>
     Saisir le titre :
@@ -67,11 +75,11 @@
   </div>
 
 
-  <button (click)="save()">Créer votre facture </button>
+  <button class="btn btn-primary" (click)="save()">Créer votre facture </button>
 
 
 </div>
 
 
 
-<pre>{{ listeProduits | json }}</pre>
+<!--<pre>{{ listeProduits | json }}</pre>-->

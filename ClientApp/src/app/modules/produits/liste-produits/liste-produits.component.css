@@ -1,0 +1,23 @@
+thead {
+  background-color: #f3f5f6;
+  padding: 10px;
+}
+
+th {
+    font-weight:500;
+  padding: 1rem;
+}
+
+td {
+  padding: 1rem;
+}
+
+.div-table {
+  background-color: white;
+  border-radius: 12px;
+}
+
+  .div-table th {
+    color: #737b8f;
+    font-weight: 500;
+  }

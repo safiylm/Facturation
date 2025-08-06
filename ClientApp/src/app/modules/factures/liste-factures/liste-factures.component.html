@@ -5,28 +5,27 @@
 
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">CLIENT</th>
-      <th scope="col">TITRE</th>
-      <th scope="col">TOTAL TVA </th>
-      <th scope="col">TOTAL HT</th>
-      <th scope="col">DATE DE CREATION</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cli of liste">
-      <td> <app-nom-client [id]="cli.clientId"></app-nom-client> </td>
-      <td> {{ cli.titre }} </td>
-      <td> {{ cli.totalTVA }} </td>
-      <td> {{ cli.totalHT }} </td>
-      <td> {{ cli.createdAt }} </td>
-      <td><a href="facture/{{cli.id}}">Aperçu </a> </td>
-      <td><a href="edit-facture/{{cli.id}}">Edit </a> </td>
-    </tr>
+<div class="div-table">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Designation</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Totol TTC</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cli of liste">
+        <td> <app-nom-client [id]="cli.clientId"></app-nom-client> </td>
+        <td> {{ cli.titre }} </td>
+        <td> {{ cli.totalTVA + cli.totalHT }}€ </td>
+        <td> {{ cli.createdAt | date: 'dd/MM/yyyy' }} </td>
+        <td><a href="facture/{{cli.id}}">Aperçu </a> </td>
+      </tr>
 
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 
-<pre>{{ liste | json }}</pre>
+<!--<pre>{{ liste | json }}</pre>-->

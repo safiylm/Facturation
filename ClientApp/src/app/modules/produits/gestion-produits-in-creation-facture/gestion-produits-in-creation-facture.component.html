@@ -1,28 +1,29 @@
+<div class="div-table">
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">DESIGNATION</th>
-      <th scope="col">QUANTITE</th>
-      <th scope="col">PRIX UNITAIRE </th>
-      <th scope="col">TVA</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-</table>
-<div>
-  <div *ngFor="let produit of liste;  index as i">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Designation</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">Prix unitaire </th>
+        <th scope="col">Tva</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+  </table>
+  <div>
+    <div *ngFor="let produit of liste;  index as i">
 
-    <app-edit-produit [produit]="liste[i]" [index]="i" (editProduitEvent)="edit(i, $event)"></app-edit-produit>
+      <app-edit-produit [produit]="liste[i]" [index]="i" (editProduitEvent)="edit(i, $event)"></app-edit-produit>
 
+    </div>
+
+    <app-create-produit (createProduitEvent)="add($event)"></app-create-produit>
   </div>
 
-  <app-create-produit (createProduitEvent)="add($event)"></app-create-produit>
-</div>
+  <div>Total HT: {{ totalHT}}</div>
+  <div>Total TVA {{ totalTVA}}</div>
+  <button class="btn btn-primary " (click)="save()">Enregistrer les produits </button>
 
-<div>Total HT: {{ totalHT}}</div>
-<div>Total TVA {{ totalTVA}}</div>
-<button class="btn btn-primary " (click)="save()">Enregistrer les produits </button>
-
-
-<pre>{{ liste | json }}</pre>
+  </div>
+<!--<pre>{{ liste | json }}</pre>-->
