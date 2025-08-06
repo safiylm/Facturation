@@ -24,6 +24,12 @@ import { EditProduitComponent } from './modules/produits/edit-produit/edit-produ
 import { CreateProduitComponent } from './modules/produits/create-produit/create-produit.component';
 import { GestionProduitsComponent } from './modules/produits/gestion-produits/gestion-produits.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditFacturesComponent } from './modules/factures/edit-factures/edit-factures.component';
+import { ApercuFacturesComponent } from './modules/factures/apercu-factures/apercu-factures.component';
+import { NomClientComponent } from './modules/clients/nom-client/nom-client.component';
+import { ListeProduitsComponent } from './modules/produits/liste-produits/liste-produits.component';
+import { GestionProduitsInCreationFactureComponent } from './modules/produits/gestion-produits-in-creation-facture/gestion-produits-in-creation-facture.component';
+import { GestionProduitsInEditFactureComponent } from './modules/produits/gestion-produits-in-edit-facture/gestion-produits-in-edit-facture.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +43,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EditUserComponent, ListeFacturesComponent, CreateFactureComponent,
     ListeClientsComponent, SelectClientComponent,
     DetailClientComponent, EditProduitComponent, CreateProduitComponent
-,GestionProduitsComponent  ],
+,GestionProduitsComponent, EditFacturesComponent, ApercuFacturesComponent, 
+NomClientComponent, ListeProduitsComponent , GestionProduitsInCreationFactureComponent,
+GestionProduitsInEditFactureComponent ],
   imports: [
     BrowserModule, //.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule, BrowserAnimationsModule ,
@@ -49,12 +57,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'register', component: RegisterComponent },
       { path: 'new-client', component: CreateClientComponent },
       { path: 'edit-client/:id', component: EditClientComponent },
-      {
-        path: 'edit-user/:id', component: EditUserComponent
-      },
-      {
-        path: 'new-facture', component: CreateFactureComponent
-      },
+      { path: 'edit-user/:id', component: EditUserComponent },
+      { path: 'new-facture', component: CreateFactureComponent },
+      { path: 'edit-facture/:id', component: EditFacturesComponent },
+      { path: 'facture/:id', component: ApercuFacturesComponent },
     ])
   ],
   providers: [],

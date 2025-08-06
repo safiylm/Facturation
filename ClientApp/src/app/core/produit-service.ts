@@ -40,4 +40,8 @@ export class ProduitService {
     return this.http.get<Produit>(this.url + `/api/produits/byId?id=`+id);
   }
 
+  getProduitFactureById(id: number): Observable<Produit[]> {
+    return this.http.get<Produit[]>(this.url + `/api/produits/byFactureId?id=` + id);
+  }
+
 }

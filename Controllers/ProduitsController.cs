@@ -22,14 +22,17 @@ namespace Facturation.Controllers
         }
 
         // GET: Produits
-        public async Task<IActionResult> Index()
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-              return _context.Produit != null ? 
-                          View(await _context.Produit.ToListAsync()) :
-                          Problem("Entity set 'FacturationContext.ProduitModel'  is null.");
+            var x = await _context.Produit.ToListAsync();
+            return Ok(x);
         }
 
-        // GET: Produits/Details/5
+        // GET: Produits/byId/5
+        [Route("byId")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Produit == null)
@@ -44,52 +47,62 @@ namespace Facturation.Controllers
                 return NotFound();
             }
 
-            return View(produitModel);
+            return Ok(produitModel);
         }
 
-        // GET: Produits/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        // GET: Produits/byId/5
+        [Route("byFactureId")]
 
-        // POST: Produits/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Quantite,Designation,PrixUnitaireHT,FactureId,TVA,CreatedAt")] ProduitModel produitModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(produitModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(produitModel);
-        }
-
-        // GET: Produits/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> GetByFactureId(int? id)
         {
             if (id == null || _context.Produit == null)
             {
                 return NotFound();
             }
 
-            var produitModel = await _context.Produit.FindAsync(id);
+            var produitModel = await _context.Produit
+                .Where(m => m.FactureId == id).ToListAsync();
             if (produitModel == null)
             {
                 return NotFound();
             }
-            return View(produitModel);
+
+            return Ok(produitModel);
         }
+
+
+
+        // POST: Produits/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        //  [ValidateAntiForgeryToken]
+        [Route("create")]
+
+        public async Task<IActionResult> Create([Bind("Quantite,Designation,PrixUnitaireHT,FactureId,TVA,CreatedAt")] ProduitModel[] produitModel)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach(var produit in produitModel)
+                {
+                    _context.Add(produit);
+
+                }
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Created with success" });
+
+            }
+            return Ok(produitModel);
+        }
+
+ 
 
         // POST: Produits/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Route("edit")]
+       // [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Quantite,Designation,PrixUnitaireHT,FactureId,TVA,CreatedAt")] ProduitModel produitModel)
         {
             if (id != produitModel.Id)

@@ -23,28 +23,14 @@ namespace Facturation.Controllers
 
         // GET: Factures
         [HttpGet]
-        [Route("create")]
         public async Task<IActionResult> Index()
         {
-            /*   return _context.Facture != null ? 
-                          View(await _context.Facture.ToListAsync()) :
-                          Problem("Entity set 'FacturationContext.FactureModel'  is null.");
-      */
+            var x = await _context.Facture.ToListAsync();
+            return Ok(x);
+        }
 
-
-            FactureModel factureModel = new FactureModel() {Id=1,  ClientId = 1, UserId=  2 , Titre="Devis", 
-                TotalTVA=23, TotalHT=4, Informations=",v,idkjf vc,xlsc<w", CreatedAt=DateTime.Now};
-            _context.Add(factureModel);
-            await _context.SaveChangesAsync();
-            if (factureModel == null || _context.Facture == null)
-            {
-                return Ok("model is null ou context is null ");
-            }
-            return Ok(factureModel);
-    
-}
-    
-
+        [HttpGet]
+        [Route("byId")]
         // GET: Factures/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -60,53 +46,41 @@ namespace Facturation.Controllers
                 return NotFound();
             }
 
-            return View(factureModel);
+            return Ok(factureModel);
 
-        }
-
-        // GET: Factures/Create
-        public IActionResult Create()
-        {
-            return View();
         }
 
         // POST: Factures/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClientId,UserId,Titre,TotalTVA,TotalHT,Informations,CreatedAt")] FactureModel factureModel)
+        //   [ValidateAntiForgeryToken]
+        [Route("create")]
+        public async Task<IActionResult> Create([Bind("ClientId,UserId,Titre,TotalTVA,TotalHT,Informations,CreatedAt")] FactureModel factureModel)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Facture.Add(factureModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Ok(new
+                {
+                    message = "Facture created successfully",
+                    id = factureModel.Id // << retourne l'ID ici
+                });
             }
-            return View(factureModel);
+            return Ok(new { message = "Facture ModelStat is not valid." });
         }
 
-        // GET: Factures/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Facture == null)
-            {
-                return NotFound();
-            }
-
-            var factureModel = await _context.Facture.FindAsync(id);
-            if (factureModel == null)
-            {
-                return NotFound();
-            }
-            return View(factureModel);
-        }
+   
+ 
 
         // POST: Factures/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Route("edit")]
+       // [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,UserId,Titre,TotalTVA,TotalHT,Informations,CreatedAt")] FactureModel factureModel)
         {
             if (id != factureModel.Id)
@@ -137,27 +111,12 @@ namespace Facturation.Controllers
             return View(factureModel);
         }
 
-        // GET: Factures/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Facture == null)
-            {
-                return NotFound();
-            }
 
-            var factureModel = await _context.Facture
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (factureModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(factureModel);
-        }
+ 
 
         // POST: Factures/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Facture == null)
@@ -165,7 +124,7 @@ namespace Facturation.Controllers
                 return Problem("Entity set 'FacturationContext.FactureModel'  is null.");
             }
             var factureModel = await _context.Facture.FindAsync(id);
-            if (factureModel != null)
+            if (factureModel != null) 
             {
                 _context.Facture.Remove(factureModel);
             }

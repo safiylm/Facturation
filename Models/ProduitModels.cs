@@ -12,15 +12,15 @@ namespace Facturation.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // << important
         public int Id { get; set; }
 
-        public float Quantite { get; set; }
+        public double Quantite { get; set; }
        
        public string Designation { get; set; }
         
-        public float PrixUnitaireHT { get; set; }
+        public double PrixUnitaireHT { get; set; }
         
         public int FactureId { get; set; }
         
-        public float TVA { get; set; }
+        public double TVA { get; set; }
         public DateTime? CreatedAt { get; set; }
 
 

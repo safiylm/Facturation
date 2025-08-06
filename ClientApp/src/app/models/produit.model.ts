@@ -7,7 +7,7 @@ export class Produit {
     public quantite: number,
     public designation: string,
     public prixUnitaireHT: number,
-    public TVA: number,
+    public tva: number,
     public createdAt: Date| string ,
     public factureId: number,
 

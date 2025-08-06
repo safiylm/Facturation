@@ -16,8 +16,8 @@ namespace Facturation.Models
 
         public string Titre { get; set; }
 
-        public float TotalTVA { get; set; }
-        public float TotalHT { get; set; }
+        public double TotalTVA { get; set; }
+        public double TotalHT { get; set; }
 
         public string Informations { get; set; }
         public DateTime? CreatedAt { get; set; }
