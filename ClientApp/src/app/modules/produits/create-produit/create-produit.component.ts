@@ -17,7 +17,7 @@ export class CreateProduitComponent{
     quantite: 1,
     designation : 'Iphone 16',
     prixUnitaireHT: 900,
-    TVA: 99,
+    tva: 99,
     factureId: 2,
     createdAt: new Date()
   };

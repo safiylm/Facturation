@@ -6,7 +6,7 @@
         {{index}}  <td> {{ produit.designation }} </td>
         <td> {{ produit.quantite }} </td>
         <td> {{ produit.prixUnitaireHT }} </td>
-        <td> {{ produit.TVA }} </td>
+        <td> {{ produit.tva }} </td>
         <td> <button class="btn btn-primary" (click)="openEditForm()">edit</button></td>
       </ng-container>
 
@@ -23,7 +23,7 @@
           <input type="number" name="prixUnitaireHT" class="form-control" [(ngModel)]="produit.prixUnitaireHT" />
         </td>
         <td>
-          <input type="number" name="TVA" class="form-control" [(ngModel)]="produit.TVA" />
+          <input type="number" name="TVA" class="form-control" [(ngModel)]="produit.tva" />
         </td>
         <td>
           <button type="submit" class="btn btn-primary" (click)="edit()">Edit </button>
