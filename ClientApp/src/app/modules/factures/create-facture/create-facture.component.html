@@ -1,29 +1,77 @@
 <h1>Création de facture</h1>
 
-<div *ngIf="clientId=='' ">
+<div *ngIf="clientId==0 ">
 
   <h2>Etape 1: Creer un Client ou Choisissez :</h2>
-  <button class="btn btn-light" (click)="clientchoix='create'">Créer un nouveau client</button>
-  <button class="btn btn-light" (click)="clientchoix='select'">Choisir un client</button>
-
-  <app-create-client *ngIf="clientchoix=='create'" (newItemEvent)="addItem($event)"></app-create-client>
-  <app-select-client *ngIf="clientchoix=='select'"></app-select-client>
+  <app-create-client (selectEvent)="openSelectForm()" *ngIf="clientchoix=='create'" (getClientIDEvent)="getClientId($event)"></app-create-client>
+  <app-select-client (createEvent)="openCreateForm()" *ngIf="clientchoix=='select'" (getClientIDEvent)="getClientId($event)"></app-select-client>
 
 </div>
 
-<div *ngIf="clientId!=''" id="div-informative-client-is-created">
+<div *ngIf="clientId!=0" id="div-informative-client-is-created">
   <h2 class="etape-reussi" *ngIf="clientchoix=='create'">Etape 1 ✅: Client est crée  </h2>
   <h2 class="etape-reussi" *ngIf="clientchoix=='select'">Etape 1 ✅: Client est selectionné </h2>
   <h2>Etape 2 : Vos produits </h2>
 </div>
 
-<div id="facture" *ngIf="clientId!=''" >
-  <div class="d-flex align-items-center justify-content-between">
+<div *ngIf="!formProduitIsSubmit">
+  <app-gestion-produits-in-creation-facture *ngIf="clientId!=0" (createFactureEvent)="getProduits($event)">
+  </app-gestion-produits-in-creation-facture>
+</div>
+
+<div id="facture" *ngIf="clientId!=0 && formProduitIsSubmit " class="d-flex flex-column">
+
+  <div class="d-flex factureTop align-items-center justify-content-between">
     <app-detail-client [id]="clientId"></app-detail-client>
     <app-detail-client [id]="clientId"></app-detail-client>
   </div>
 
-  <app-gestion-produits></app-gestion-produits>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">DESIGNATION</th>
+        <th scope="col">QUANTITE</th>
+        <th scope="col">PRIX UNITAIRE </th>
+        <th scope="col">TVA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produit of listeProduits">
+        <td> {{ produit.designation }} </td>
+        <td> {{ produit.quantite }} </td>
+        <td> {{ produit.prixUnitaireHT }} </td>
+        <td> {{ produit['tva'] }} </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <label>
+    Saisir le titre :
+    <input class="form-control" name="titre" [(ngModel)]="facture.titre" />
+  </label>
+
+  <label>
+    Saisir les inforations :
+    <input class="form-control" name="informations" [(ngModel)]="facture.informations" />
+  </label>
+
+
+
+  <div class="total">
+    <div>Total TVA : {{ facture.totalTVA}}€ </div>
+    <div>Total HT : {{ facture.totalHT }}€</div>
+    <div>Total TTC : {{ facture.totalHT + facture.totalTVA}}€</div>
+
+  </div>
+
+
+  <button (click)="save()">Créer votre facture </button>
+
 
 </div>
 
+
+
+<pre>{{ listeProduits | json }}</pre>
