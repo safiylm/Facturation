@@ -40,30 +40,15 @@ const fadeOut = trigger('fadeOut', [
   ]
 })
 
-export class CreateClientComponent implements OnInit {
+export class CreateClientComponent {
 
   constructor(private clientService: ClientService) { }
 
   resultat = "";
+  @Output() getClientIDEvent = new EventEmitter<number>();
 
-  @Output() newItemEvent = new EventEmitter<string>();
+  @Output() selectEvent = new EventEmitter<any>();
 
-  addNewItem(value: string) {
-
-    this.resultat = "chargement"
-    setTimeout(() => {
-      this.resultat = "ok"
-
-    }, 2000)
-
-    setTimeout(() => {
-      this.resultat = ""
-      this.newItemEvent.emit(value);
-    }, 4000)
-  }
-
-  ngOnInit(): void {
-  }
 
    client = {
      Nom: 'Jean',
@@ -76,6 +61,17 @@ export class CreateClientComponent implements OnInit {
 
 
   create() {
+    this.resultat = "chargement"
+    setTimeout(() => {
+      this.resultat = "ok"
+
+    }, 2000)
+
+    setTimeout(() => {
+      this.resultat = ""
+      this.getClientIDEvent.emit(5);
+    }, 4000)
+
 
     this.clientService.create(this.client).subscribe({
       next: (res) => {
@@ -86,6 +82,10 @@ export class CreateClientComponent implements OnInit {
         console.error('Erreur API :', err);
       }
     })
+  }
+
+  openSelectForm() {
+    this.selectEvent.emit("select");
   }
 
 }

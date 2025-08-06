@@ -1,6 +1,6 @@
 form {
   display: block;
-  margin: 60px auto;
+  margin: 20px auto;
   width: 500px;
 }
 
@@ -34,4 +34,17 @@ input {
 
 .spinner-border{
     margin:15px;
+}
+
+button[type='submit'] {
+  margin-right : 15px;
+}
+
+#btnOpenSelectForm {
+  text-align: right;
+  padding: 5px 10px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  border: none;
 }

@@ -1,4 +1,3 @@
-<button class="btn btn-light" (click)="addNewItem('2')">clic clic</button>
 
 <div class="div-spinner" *ngIf="resultat!=''" @fadeIn @fadeOut>
 
@@ -17,7 +16,7 @@
 
 
 <form (ngSubmit)="create()" autocomplete="off">
-  <h1>New Client  </h1>
+  <p>Créer un nouveau client</p>
 
   <label>
     Saisissez le nom :<br />
@@ -43,9 +42,10 @@
     Saisissez l'adresse:<br />
     <input type="text" name="adresse" class="form-control" [(ngModel)]="client.Adresse" />
   </label>
-
-  <button type="submit" class="btn btn-primary">Ajouter </button>
-
+  <div class="d-flex align-items-center justify-content-center" >
+    <button type="submit" class="btn btn-primary">Créer </button>
+    <button id="btnOpenSelectForm" class="btn btn-light" type="button" (click)="openSelectForm()">Selectionner un client</button>
+  </div>
 </form>
 
 <p>{{ resultat }}</p>
