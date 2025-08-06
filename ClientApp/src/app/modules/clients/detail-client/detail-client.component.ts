@@ -10,7 +10,7 @@ import { Client } from '../../../models/client.model';
 })
 export class DetailClientComponent implements OnInit {
 
-  @Input() id!: string;
+  @Input() id!: number;
   client !: Client;
 
   ngOnInit(): void {
