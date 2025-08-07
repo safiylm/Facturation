@@ -1,0 +1,33 @@
+th {
+  min-width: 140px;
+}
+
+button {
+  margin: 20px auto;
+  display: block;
+}
+
+
+.div-table {
+  background-color: white;
+  padding: 20px 0;
+  border-radius: 12px;
+}
+
+  .div-table th {
+    color: #737b8f;
+    font-weight: 500;
+  }
+
+  @media(max-width: 800px){
+    .div-table {
+      padding: 5px;
+      overflow: scroll;
+    }
+
+    th {
+      min-width: 110px;
+    }
+
+
+  }
