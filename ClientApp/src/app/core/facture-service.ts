@@ -27,8 +27,9 @@ export class FactureService {
   }
 
   edit(facture: Facture): Observable<any> {
-    return this.http.post(this.url + `/api/factures/edit`,
-      facture , { responseType: 'text' })
+   // return this.http.post(this.url + `/api/factures/edit`,
+     // facture, { responseType: 'text' })
+    return this.http.post(`${this.url}/api/factures/edit`, facture, { responseType: 'text' });
   }
 
   delete(id: number): Observable<any> {

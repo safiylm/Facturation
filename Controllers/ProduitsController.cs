@@ -103,34 +103,30 @@ namespace Facturation.Controllers
         [HttpPost]
         [Route("edit")]
        // [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Quantite,Designation,PrixUnitaireHT,FactureId,TVA,CreatedAt")] ProduitModel produitModel)
+        public async Task<IActionResult> Edit( [Bind("Id,Quantite,Designation,PrixUnitaireHT,FactureId,TVA,CreatedAt")] ProduitModel produitModel)
         {
-            if (id != produitModel.Id)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(produitModel);
+                    _context.Produit.Update(produitModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!ProduitModelExists(produitModel.Id))
                     {
-                        return NotFound();
+                        return Ok(new { message = "id not exists" });
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Ok(new { message = "edit produit reussii" });
             }
-            return View(produitModel);
+            return Ok(produitModel);
         }
 
         // GET: Produits/Delete/5

@@ -1,0 +1,15 @@
+<div id="facture" *ngIf="facture">
+  <div class="facture-top d-flex align-items-center justify-content-between">
+    <app-detail-client [id]="facture.clientId"></app-detail-client>
+
+    <div>
+      <h1>FACTURE</h1>
+      <p>N° : 000{{facture.id}}</p>
+      <p>Date: {{facture.createdAt  | date: 'dd/MM/yyyy'}}</p>
+    </div>
+  </div>
+
+
+  <app-gestion-produits-in-edit-facture  (editFactureEvent)="getProduits($event)"></app-gestion-produits-in-edit-facture>
+
+</div>

@@ -20,3 +20,11 @@
 .facture-top {
  margin: 50px 0 ;
 }
+
+#a-edit{
+    margin-right:20px;
+    border-radius:12px;
+    padding: 8px 16px;
+    background-color: white;
+    text-decoration:none;
+}

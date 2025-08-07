@@ -3,7 +3,7 @@
   <tbody>
     <tr>
       <ng-container *ngIf=" !openEditForm_ ; else editTemplate">
-        {{index}}  <td> {{ produit.designation }} </td>
+        <td> {{ produit.designation }} </td>
         <td> {{ produit.quantite }} </td>
         <td> {{ produit.prixUnitaireHT }} </td>
         <td> {{ produit.tva }} </td>

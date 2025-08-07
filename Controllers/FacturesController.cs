@@ -81,34 +81,30 @@ namespace Facturation.Controllers
         [HttpPost]
         [Route("edit")]
        // [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClientId,UserId,Titre,TotalTVA,TotalHT,Informations,CreatedAt")] FactureModel factureModel)
+        public async Task<IActionResult> Edit( [Bind("Id,ClientId,UserId,Titre,TotalTVA,TotalHT,Informations,CreatedAt")] FactureModel factureModel)
         {
-            if (id != factureModel.Id)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(factureModel);
+                    _context.Facture.Update(factureModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!FactureModelExists(factureModel.Id))
                     {
-                        return NotFound();
+                        return Ok(new { message ="id facture not founded" });
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Ok(new { message = "Facture edit Reussi" });
             }
-            return View(factureModel);
+            return Ok(factureModel);
         }
 
 
