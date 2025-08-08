@@ -29,6 +29,20 @@ namespace Facturation.Controllers
             return Ok(x);
         }
 
+
+        [HttpGet]
+        [Route("byAuteurId")]
+        public async Task<IActionResult> GetByAuteurIdAsync(int id)
+        {
+            var x = await _context.Facture.Where(cli => cli.UserId == id).ToListAsync();
+            if (x == null)
+            {
+                return Ok(new { message = "liste null" });
+            }
+            return Ok(x);
+        }
+
+
         [HttpGet]
         [Route("byId")]
         // GET: Factures/Details/5
@@ -56,7 +70,7 @@ namespace Facturation.Controllers
         [HttpPost]
         //   [ValidateAntiForgeryToken]
         [Route("create")]
-        public async Task<IActionResult> Create([Bind("ClientId,UserId,Titre,TotalTVA,TotalHT,Informations,CreatedAt")] FactureModel factureModel)
+        public async Task<IActionResult> Create([Bind("ClientId,UserId,Titre,TotalTVA,TotalHT,Remarques, Status, CreatedAt")] FactureModel factureModel)
         {
 
             if (ModelState.IsValid)

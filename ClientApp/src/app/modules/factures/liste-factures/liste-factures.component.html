@@ -4,25 +4,32 @@
   <a href="/new-facture" id="a-add-new-facture">Créer une nouvelle facture</a>
 
 </div>
+<input [(ngModel)]="searchFacture" name="searchFacture" class="form-control" placeholder="Recherche Client" (keyup.enter)="search()"/>
 
-<div class="div-table">
+<div class="div-table" *ngIf="liste">
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Designation</th>
-        <th scope="col">Titre</th>
+        <th scope="col">Client</th>
+        <th scope="col">Status</th>
         <th scope="col">Totol TTC</th>
         <th scope="col">Date</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cli of liste">
-        <td> <app-nom-client [id]="cli.clientId"></app-nom-client> </td>
-        <td> {{ cli.titre }} </td>
-        <td> {{ cli.totalTVA + cli.totalHT }}€ </td>
-        <td> {{ cli.createdAt | date: 'dd/MM/yyyy' }} </td>
-        <td><a href="facture/{{cli.id}}">Aperçu </a> </td>
+
+      <tr *ngFor="let facture of liste">
+        <td>   <a href="edit-client/{{facture.clientId}}"><app-nom-client [id]="facture.clientId"></app-nom-client> </a></td>
+        <td>
+          {{ facture.status }}
+        </td>
+        <td> {{ facture.totalTVA + facture.totalHT }}€ </td>
+        <td> {{ facture.createdAt | date: 'dd/MM/yyyy' }} </td>
+        <td> <a href="facture/{{facture.id}}"> Voir la facture </a></td>
+
       </tr>
+
+      <tr *ngIf="liste.length==0"> Aucune facture crée pour le moment </tr>
 
     </tbody>
   </table>

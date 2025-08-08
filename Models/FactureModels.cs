@@ -18,8 +18,9 @@ namespace Facturation.Models
 
         public double TotalTVA { get; set; }
         public double TotalHT { get; set; }
+        public string Status { get; set; }
 
-        public string Informations { get; set; }
+        public string Remarques { get; set; }
         public DateTime? CreatedAt { get; set; }
 
 

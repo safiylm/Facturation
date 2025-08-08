@@ -17,12 +17,16 @@ namespace Facturation.Models
        public string Prenom { get; set; }
         
         public string Email { get; set; }
-        
+        public string Entreprise { get; set; }
+
         public string Adresse { get; set; }
         
         public string? Phone { get; set; }
         public DateTime? CreatedAt { get; set; }
-    
+
+
+        public int AuteurId { get; set; }
+
 
     }
 }
