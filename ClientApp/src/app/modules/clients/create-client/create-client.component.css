@@ -5,6 +5,8 @@ form {
   background-color:white;
   padding:30px;
   border-radius: 12px;
+  box-shadow: #d3d3d3 4px 4px 20px;
+
 }
 
 h1 {

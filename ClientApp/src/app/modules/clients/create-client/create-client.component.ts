@@ -51,12 +51,14 @@ export class CreateClientComponent {
 
 
    client = {
-     Nom: 'Jean',
-    Prenom: 'Dupont',
-    Email: 'jean@example.com',
-    Adresse: '123 rue Paris',
-    Phone: '0123456789',
-    CreatedAt: new Date()
+     Nom: '',
+     Prenom: '',
+     Email: '',
+     Entreprise: "",
+     Adresse: '',
+     Phone: '',
+     CreatedAt: new Date(),
+     AuteurId: Number(localStorage.getItem('userId') )
   };
 
 

@@ -1,16 +1,21 @@
 form {
   display: block;
-  margin: 60px auto;
+  margin: 20px auto;
   width: 500px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: #d3d3d3 4px 4px 20px;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 45px;
+  font-size: 25px;
 }
 
 label, button {
-  margin: 25px 0;
+  margin: 15px 0;
   display: block !important;
 }
 

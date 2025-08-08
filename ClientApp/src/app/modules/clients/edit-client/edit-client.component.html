@@ -1,19 +1,30 @@
 <form (ngSubmit)="edit()" autocomplete="off" *ngIf="client">
   <h1>Edit Client  </h1>
 
-  <label>
-    Saisissez le nom :<br />
-    <input type="text" name="nom" class="form-control" [(ngModel)]="client.nom" />
-  </label>
+  <div class="row">
+    <div class="col">
+      <label>
+        Saisissez le prenom :<br />
+        <input type="text" name="prenom" class="form-control" [(ngModel)]="client.prenom" />
+      </label>
+    </div>
+    <div class="col">
+      <label>
+        Saisissez le nom :<br />
+        <input type="text" name="nom" class="form-control" [(ngModel)]="client.nom" />
+      </label>
 
-  <label>
-    Saisissez le prenom :<br />
-    <input type="text" name="prenom" class="form-control" [(ngModel)]="client.prenom" />
-  </label>
+    </div>
+  </div>
 
   <label>
     Saisissez le email:<br />
     <input type="email" name="email" class="form-control" [(ngModel)]="client.email" />
+  </label>
+
+  <label>
+    Saisissez le nom de l'entreprise':<br />
+    <input type="text" name="entreprise" class="form-control" [(ngModel)]="client.entreprise" />
   </label>
 
   <label>
