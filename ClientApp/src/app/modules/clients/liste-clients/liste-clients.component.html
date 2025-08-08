@@ -1,9 +1,9 @@
 
 <div class="div-title d-flex align-items-center justify-content-between">
-  <h1>Mes Clients</h1>
+  <h1>Mes Clients</h1> 
   <a href="/new-client" id="a-add-new-client">Créer une nouvelle client</a>
-
 </div>
+<input [(ngModel)]="searchClient" name="searchClient"class="form-control" placeholder="Recherche Client"/>
 <div class="div-table">
 
   <table class="table">
@@ -12,15 +12,16 @@
         <th scope="col">Nom</th>
         <th scope="col">Email @</th>
         <th scope="col">Phone</th>
-        <th scope="col">Adresse</th>
+        <th scope="col">Entreprise</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let cli of liste">
         <td><a href="edit-client/{{cli.id}}"> {{ cli['nom'] }} {{ cli.prenom }}</a> </td>
-        <td> {{ cli.email }} </td>
+        <td> {{ cli.email }} {{cli.auteurId}} </td>
         <td> {{ cli.phone }} </td>
-        <td> {{ cli.adresse }} </td>
+        <td *ngIf="cli.entreprise!=''"> {{ cli.entreprise }}  </td>
+        <td *ngIf="cli.entreprise==''"> -  </td>
       </tr>
 
     </tbody>

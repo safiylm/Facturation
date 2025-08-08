@@ -24,6 +24,18 @@ namespace Facturation.Controllers
             return Ok(x);
         }
 
+        [HttpGet]
+        [Route("byAuteurId")]
+        public async Task<IActionResult> GetByAuteurIdAsync(int id)
+        {
+            var x = await _context.Client.Where(cli=> cli.AuteurId ==id).ToListAsync();
+            if (x == null)
+            {
+                return Ok(new { message = "liste null" });
+            }
+            return Ok(x);
+        }
+
 
         [HttpGet]
         [Route("byId")]
@@ -31,15 +43,15 @@ namespace Facturation.Controllers
         {
             if (id == null || _context.Client == null)
             {
-                return NotFound();
+                return Ok(new { message = "id is null" });
             }
-        //    var client = await _context.Client.FindAsync(id);
+            //    var client = await _context.Client.FindAsync(id);
 
             var client = await _context.Client
-                .FirstOrDefaultAsync(m => m.Id.Equals( id));
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (client == null)
             {
-                return NotFound();
+                return Ok( new { message ="client id don't exists"});
             }
 
            return Ok(client);

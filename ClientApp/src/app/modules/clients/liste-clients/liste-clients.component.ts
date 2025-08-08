@@ -10,14 +10,16 @@ import { Client } from '../../../models/client.model';
 export class ListeClientsComponent implements OnInit {
 
   constructor(private clientService: ClientService) { }
+  searchClient = ""
 
   liste !: Client[];
   resultat = "";
 
   ngOnInit(): void {
-
-    this.clientService.getClients().subscribe((clients) => {
+    this.clientService.getClientsByAuteurId(Number(localStorage.getItem("userId"))
+    ).subscribe((clients) => {
       this.liste = clients;
+      localStorage.setItem("nbClients",this.liste.length.toString())
     });
   }
 }
