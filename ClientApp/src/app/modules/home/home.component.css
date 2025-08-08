@@ -31,3 +31,20 @@ li a {
   width: 74%;
  
 }
+
+.xcolonne {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #ebedef;
+  margin: 0 20px;
+  width: 33%;
+  padding: 25px 45px;
+  color: #4e4c4c;
+}
+
+.xcolonne h3{
+  margin-top: 10px;
+  font-weight: 600;
+  color: #000;
+}
