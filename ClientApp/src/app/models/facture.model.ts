@@ -8,7 +8,8 @@ export class Facture {
     public titre: string,
     public totalTVA: number,
     public totalHT: number,
-    public informations: string,
+    public remarques: string,
+    public status: string,
 
     public createdAt: Date,
                
