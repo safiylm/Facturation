@@ -30,6 +30,7 @@ import { NomClientComponent } from './modules/clients/nom-client/nom-client.comp
 import { ListeProduitsComponent } from './modules/produits/liste-produits/liste-produits.component';
 import { GestionProduitsInCreationFactureComponent } from './modules/produits/gestion-produits-in-creation-facture/gestion-produits-in-creation-facture.component';
 import { GestionProduitsInEditFactureComponent } from './modules/produits/gestion-produits-in-edit-facture/gestion-produits-in-edit-facture.component';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -55,12 +56,20 @@ GestionProduitsInEditFactureComponent ],
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'new-client', component: CreateClientComponent },
-      { path: 'edit-client/:id', component: EditClientComponent },
-      { path: 'edit-user/:id', component: EditUserComponent },
-      { path: 'new-facture', component: CreateFactureComponent },
-      { path: 'edit-facture/:id', component: EditFacturesComponent },
-      { path: 'facture/:id', component: ApercuFacturesComponent },
+      { path: 'new-client', component: CreateClientComponent ,
+            canActivate: [AuthGuard],},
+      { path: 'edit-client/:id', component: EditClientComponent,
+            canActivate: [AuthGuard], },
+      { path: 'edit-user/:id', component: EditUserComponent ,
+            canActivate: [AuthGuard],},
+      { path: 'new-facture', component: CreateFactureComponent ,
+            canActivate: [AuthGuard],},
+      { path: 'edit-facture/:id', component: EditFacturesComponent ,
+            canActivate: [AuthGuard],
+      },
+      { path: 'facture/:id', component: ApercuFacturesComponent, 
+            canActivate: [AuthGuard],
+       },
     ])
   ],
   providers: [],

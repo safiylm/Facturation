@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  isLoggedIn = false;
+  userId = 0
 
   collapse() {
     this.isExpanded = false;
@@ -15,4 +17,15 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
+  ngOnInit() {
+    if (window.localStorage.getItem('isLoggedIn') == "true") {
+      this.isLoggedIn = true;
+      this.userId = Number(window.localStorage.getItem('userId'))
+    } else {
+      this.isLoggedIn = false;
+    }
+
+  }
+
 }
