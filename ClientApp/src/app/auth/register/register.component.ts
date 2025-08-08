@@ -13,12 +13,12 @@ export class RegisterComponent implements OnInit {
 
 
   user = {
-    Nom: 'Jean',
-    Prenom: 'Dupont',
-    Email: 'jean@example.com',
-    Password: 'jean@example.com',
-    Adresse: '123 rue Paris',
-    Phone: '0123456789',
+    Nom: '',
+    Prenom: '',
+    Email: '',
+    Password: '',
+    Adresse: '',
+    Phone: "",
     CreatedAt: new Date()
   };
 

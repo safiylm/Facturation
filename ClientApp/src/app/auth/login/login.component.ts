@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../../core/user-service';
 import { User } from '../../models/user.model';
 
@@ -10,27 +11,32 @@ import { User } from '../../models/user.model';
 export class LoginComponent implements OnInit {
 
   email = "jean@example.com";
-  password = "";
+  password = "jean@example.com";
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    private route: Router) { }
+
 
   liste !: User[];
   resultat = "";
 
   ngOnInit(): void {
 
-    this.userService.getUsers().subscribe((liste) => {
-      this.liste = liste;
-      console.log(liste)
-    });
   }
 
   login() {
-    console.log("email: ", this.email, ", password :", this.password)
+
     this.userService.login(this.email, this.password).subscribe(
-      (data) => {
-        if(data)
-        console.log(data);
+      (data: any) => {
+        if (data) {
+          this.resultat = data.message
+          if (data.success == true) {
+            localStorage.setItem('userId', data.utilisateur.id);
+            localStorage.setItem('isLoggedIn', "true");
+            this.route.navigate(['/']);
+
+          }
+        }
       }
     )
   }

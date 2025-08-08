@@ -7,6 +7,13 @@ using Facturation.Models;
 
 namespace Facturation.Controllers
 {
+    public class LoginRequest
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+
+
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : Controller
@@ -55,24 +62,34 @@ namespace Facturation.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<object> Login(string email)
+        public async Task <IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            if (email == null || _context.Client == null)
+            if (string.IsNullOrWhiteSpace(loginRequest.Email) || string.IsNullOrWhiteSpace(loginRequest.Password))
             {
-                return Ok(new { erreur = "email is null || db client is null" });
+                return Ok(new { success = false, message = "Email ou mot de passe manquant" });
             }
-            //    var client = await _context.Client.FindAsync(id);
-            //&& m.Password.Equals(password)
+
             var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Email.Equals("jean@example.com") );
+                .FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
+
             if (user == null)
             {
-                return Ok(new { erreur = "user is null" });
-
+                return Ok(new { success = false, message = "Utilisateur introuvable" });
             }
 
-            return Ok(user);
+            if (user.Password != loginRequest.Password)
+            {
+                return Ok(new { success = false, message = "Mot de passe incorrect" });
+            }
+
+            return Ok(new
+            {
+                success = true,
+                message = "Connexion réussie",
+                utilisateur = new { user.Id, user.Email }
+            });
         }
+
 
 
         // POST: Users/Create

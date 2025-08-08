@@ -2,6 +2,10 @@ form{
     display:block;
     margin:60px auto;
     width:500px;
+    background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+box-shadow: #d3d3d3 4px 4px 20px;
 }
 
 h1{
@@ -16,4 +20,10 @@ label, button {
 
 input{
     margin-top: 5px;
+}
+
+button, a {
+  margin: 10px auto;
+  text-align:center;
+  display:block;
 }

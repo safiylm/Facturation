@@ -10,14 +10,11 @@
     <input type="password" name="password" class="form-control" [(ngModel)]="password" />
   </label>
 
-  <button type="submit" class="btn btn-primary">Se Connecter </button>
+  {{ resultat }}
+  <button type="submit" class="btn btn-dark">Se Connecter </button>
 
   <a href='/register'>Pas de compte?</a>
 </form>
-<div *ngFor="let cli of liste">
 
-    <a href="edit-user/{{cli.id}}"> {{ cli['nom'] }} </a>
-  </div>
-
-
-<pre>{{ liste | json }}</pre>
+<!-- 
+<pre>{{ liste | json }}</pre> -->

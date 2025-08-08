@@ -42,8 +42,9 @@ export class UserService {
   }
 
   login(email: string, password: string) {
+
     return this.http.post(this.url + `/api/users/login`,
-      "jean@example.com");
+      { email: email, password: password });
 
   }
 }
