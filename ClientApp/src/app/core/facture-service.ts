@@ -20,6 +20,10 @@ export class FactureService {
     return this.http.get<Facture[]>(this.url + `/api/factures`);
   }
 
+  getFacturesByAuteurId(id: number ): Observable<Facture[]> {
+    return this.http.get<Facture[]>(this.url + `/api/factures/byAuteurId?id=`+ id);
+  }
+
 
   create(facture: any): Observable<any> {
     return this.http.post(this.url + `/api/factures/create`,

@@ -27,11 +27,12 @@ export class CreateFactureComponent implements OnInit {
 
   facture = {
     clientId: this.clientId,
-    userId: 1,
+    userId: Number(localStorage.getItem('userId')),
     titre: 'Facture ',
     totalTVA: 0,
     totalHT: 0,
-    informations: "",
+    remarques: "",
+    status: "En Attente",
     createdAt: new Date()
 
   };
