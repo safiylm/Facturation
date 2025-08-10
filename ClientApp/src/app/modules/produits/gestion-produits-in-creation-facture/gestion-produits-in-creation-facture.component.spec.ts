@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { GestionProduitsInCreationFactureComponent } from './gestion-produits-in-creation-facture.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GestionProduitsInCreationFactureComponent', () => {
   let component: GestionProduitsInCreationFactureComponent;
@@ -8,7 +9,8 @@ describe('GestionProduitsInCreationFactureComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GestionProduitsInCreationFactureComponent ]
+      declarations: [ GestionProduitsInCreationFactureComponent ], 
+      imports:[    RouterTestingModule, HttpClientTestingModule]
     })
     .compileComponents();
   });

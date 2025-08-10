@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateFactureComponent } from './create-facture.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CreateFactureComponent', () => {
   let component: CreateFactureComponent;
@@ -8,7 +9,8 @@ describe('CreateFactureComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateFactureComponent ]
+      declarations: [ CreateFactureComponent ], 
+      imports:[HttpClientTestingModule]
     })
     .compileComponents();
   });
