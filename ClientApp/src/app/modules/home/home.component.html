@@ -1,25 +1,2 @@
-<div class="d-flex">
-  <ul>
-    <li><a class="active" href="#home">Home</a></li>
-    <li><a href="#factures">Factures</a></li>
-    <li><a href="#clients">Clients</a></li>
-    <li><button class="btn btn-light" (click)="logout()">Deconnexion</button></li>
-  </ul>
-
-  <div class="home">
-    <div class="d-flex align-items-center justify-content-center">
-      <div class="xcolonne">Total encaissé ce mois  :
-        <h3>{{total}}</h3>
-      </div>
-      <div class="xcolonne">Facture en attente :
-        <h3>{{factureEnAttente}}</h3>
-      </div>
-      <div class="xcolonne">Nombre de clients :
-        <h3>{{nbClients}}</h3>
-      </div>
-    </div>
-
-    <app-liste-factures id="factures"></app-liste-factures>
-    <app-liste-clients id="clients"></app-liste-clients>
-  </div>
-</div>
+<app-dashboard *ngIf="connecte=='true'"></app-dashboard>
+<div  *ngIf="connecte!='true'">Vous n'etes pas connecte '</div>
