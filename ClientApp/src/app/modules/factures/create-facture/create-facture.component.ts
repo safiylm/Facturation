@@ -10,10 +10,12 @@ import { ProduitService } from '../../../core/produit-service';
 export class CreateFactureComponent implements OnInit {
 
   constructor(
-    private factureService: FactureService, private produitService: ProduitService) { }
-  listeProduits !: any;
-  resultat=""
-  clientchoix ="select"
+    private factureService: FactureService, 
+    private produitService: ProduitService) { }
+  
+    listeProduits !: any;
+  resultat = ""
+  clientchoix = "select"
   clientId = 0
   formProduitIsSubmit = false;
   currentDate = new Date();
@@ -34,7 +36,6 @@ export class CreateFactureComponent implements OnInit {
     remarques: "",
     status: "En Attente",
     createdAt: new Date()
-
   };
 
   getProduits(listeproduits: any) {
@@ -50,20 +51,17 @@ export class CreateFactureComponent implements OnInit {
     this.factureService.create(this.facture)
       .subscribe(
         (data) => {
-           let  jsonObj = JSON.parse(data); // string to "any" object first
-          console.log(jsonObj["id"])
           for (let prod of this.listeProduits)
-          prod.factureId = jsonObj["id"];
+            prod.factureId = data["id"];
 
           this.produitService.create(this.listeProduits).subscribe(
-              (data1) => {
-              console.log(data1)
-              this.resultat= data1
-              })
-          
+            (data1) => {
+              this.resultat = data1.message
+            })
+
         }
       )
-   
+
   }
 
   openCreateForm() {
