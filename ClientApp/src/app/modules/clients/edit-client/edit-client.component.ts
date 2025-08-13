@@ -15,6 +15,8 @@ export class EditClientComponent implements OnInit {
 
   client !: Client;
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id')!;
+
     this.clientService.getClientById(Number(this.id)).subscribe(
       (client) => {
         this.client = client;
@@ -23,25 +25,10 @@ export class EditClientComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute, private clientService: ClientService) {
-    this.id = this.route.snapshot.paramMap.get('id')!;
   }
 
   edit() {
-    this.clientService.edit( this.client ).subscribe(
-      {
-      next: (res) => {
-        console.log(res); // ✅ { message: "..."}
-        this.resultat = res.message + " ✅ ";
-      },
-      error: (err) => {
-        console.error('Erreur API :', err);
-      }
-    })
-  }
-
-  delete() {
-   if( confirm("Etes vous sur de supprimer?"))
-    this.clientService.delete( Number(this.id) ).subscribe(
+    this.clientService.edit(this.client).subscribe(
       {
         next: (res) => {
           console.log(res); // ✅ { message: "..."}
@@ -51,6 +38,20 @@ export class EditClientComponent implements OnInit {
           console.error('Erreur API :', err);
         }
       })
+  }
+
+  delete() {
+    if (confirm("Etes vous sur de supprimer?"))
+      this.clientService.delete(Number(this.id)).subscribe(
+        {
+          next: (res) => {
+            console.log(res); // ✅ { message: "..."}
+            this.resultat = res.message + " ✅ ";
+          },
+          error: (err) => {
+            console.error('Erreur API :', err);
+          }
+        })
   }
 
 }

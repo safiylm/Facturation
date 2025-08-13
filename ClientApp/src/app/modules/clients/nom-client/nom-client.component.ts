@@ -15,7 +15,9 @@ export class NomClientComponent implements OnInit {
   ngOnInit(): void {
     this.clientService.getClientById(Number(this.id)).subscribe(
       (data) => {
+        if(data){
         this.nom = data.prenom+" "+ data.nom
+      console.log(this.nom)}
       }
     )
   }

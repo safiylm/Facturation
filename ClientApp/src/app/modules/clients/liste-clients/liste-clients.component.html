@@ -10,14 +10,14 @@
     <thead>
       <tr>
         <th scope="col">Nom</th>
-        <th scope="col">Email @</th>
+        <th scope="col">Email </th>
         <th scope="col">Phone</th>
         <th scope="col">Entreprise</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let cli of liste">
-        <td><a href="edit-client/{{cli.id}}"> {{ cli['nom'] }} {{ cli.prenom }}</a> </td>
+        <td><a href="client/edit/{{cli.id}}"> {{ cli['nom'] }} {{ cli.prenom }}</a> </td>
         <td> {{ cli.email }} {{cli.auteurId}} </td>
         <td> {{ cli.phone }} </td>
         <td *ngIf="cli.entreprise!=''"> {{ cli.entreprise }}  </td>

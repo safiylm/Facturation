@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ClientService } from '../../../core/client-service';
-import { Client } from '../../../models/client.model';
 import { transition, style, animate, trigger } from '@angular/animations';
 
 const enterTransition = transition(':enter', [
@@ -49,7 +48,6 @@ export class CreateClientComponent {
 
   @Output() selectEvent = new EventEmitter<any>();
 
-
    client = {
      Nom: '',
      Prenom: '',
@@ -63,22 +61,13 @@ export class CreateClientComponent {
 
 
   create() {
-    this.resultat = "chargement"
-    setTimeout(() => {
-      this.resultat = "ok"
-
-    }, 2000)
-
-    setTimeout(() => {
-      this.resultat = ""
-      this.getClientIDEvent.emit(5);
-    }, 4000)
-
-
     this.clientService.create(this.client).subscribe({
       next: (res) => {
         console.log( res ); // ✅ { message: "..."}
         this.resultat = res.message+" ✅ ";
+        if(res.id != null)
+        this.getClientIDEvent.emit(res.id);
+
       },
       error: (err) => {
         console.error('Erreur API :', err);

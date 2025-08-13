@@ -29,16 +29,12 @@ export class SelectClientComponent implements OnInit {
   }
 
 
-  addNewItem() {
-    this.resultat = "chargement"
+  select() {
+    this.resultat = "chargement";
     setTimeout(() => {
-      this.resultat = "ok"
-    }, 2000)
-
-    setTimeout(() => {
-      this.resultat = ""
+      this.resultat = "";
       this.getClientIDEvent.emit(this.clientSelect);
-    }, 4000)
+    }, 4000);
   }
 
 }
