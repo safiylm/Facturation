@@ -7,7 +7,7 @@ import { Produit } from '../../../models/produit.model';
   templateUrl: './create-produit.component.html',
   styleUrls: ['./create-produit.component.css']
 })
-export class CreateProduitComponent{
+export  class CreateProduitComponent{
 
   constructor() { }
 
@@ -15,9 +15,9 @@ export class CreateProduitComponent{
 
   produit = {
     quantite: 1,
-    designation : 'Iphone 16',
-    prixUnitaireHT: 900,
-    tva: 99,
+    designation : 'PANTALON',
+    prixUnitaireHT: 9,
+    tva: .99,
     factureId: 2,
     createdAt: new Date()
   };
