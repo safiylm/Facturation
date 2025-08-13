@@ -1,6 +1,6 @@
 <table class="table">
 
-  <tbody>
+  <tbody *ngIf="produit">
     <tr>
       <ng-container *ngIf=" !openEditForm_ ; else editTemplate">
         <td> {{ produit.designation }} </td>
