@@ -11,11 +11,12 @@ import { User } from '../../../models/user.model';
 export class EditUserComponent implements OnInit {
 
 
-  id = "";
+  id !: string;
   resultat = "";
-
   user !: User;
+
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id')!;
     this.userService.getUserById(Number(this.id)).subscribe(
       (user) => {
         this.user = user;
@@ -24,7 +25,6 @@ export class EditUserComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute, private userService: UserService) {
-    this.id = this.route.snapshot.paramMap.get('id')!;
   }
 
   edit() {
