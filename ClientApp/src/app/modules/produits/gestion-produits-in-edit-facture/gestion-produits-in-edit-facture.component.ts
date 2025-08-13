@@ -15,7 +15,7 @@ export class GestionProduitsInEditFactureComponent implements OnInit {
     private produitService: ProduitService) { }
 
   @Output() editFactureEvent = new EventEmitter<any>();
-  liste !: Produit[];
+  liste : Produit[] =[];
   id !: number;
   totalHT = 0;
   totalTVA = 0;
@@ -42,8 +42,6 @@ export class GestionProduitsInEditFactureComponent implements OnInit {
     factureId: 2,
     createdAt: new Date()
   };
-
-
 
 
   add(produit: any) {

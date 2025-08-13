@@ -13,7 +13,6 @@ export class ListeClientsComponent implements OnInit {
   searchClient = ""
 
   liste !: Client[];
-  resultat = "";
 
   ngOnInit(): void {
     this.clientService.getClientsByAuteurId(Number(localStorage.getItem("userId"))

@@ -18,10 +18,10 @@ export class SelectClientComponent implements OnInit {
   clientSelect = 0;
 
   ngOnInit(): void {
-
-    this.clientService.getClients().subscribe((clients) => {
-      this.liste = clients;
-    });
+    this.clientService.getClientsByAuteurId(Number(localStorage.getItem("userId")))
+      .subscribe((clients) => {
+        this.liste = clients;
+      });
   }
 
   openCreateForm() {
@@ -30,11 +30,9 @@ export class SelectClientComponent implements OnInit {
 
 
   addNewItem() {
-
     this.resultat = "chargement"
     setTimeout(() => {
       this.resultat = "ok"
-
     }, 2000)
 
     setTimeout(() => {
