@@ -10,21 +10,12 @@ import { Produit } from '../../../models/produit.model';
 })
 export class GestionProduitsInCreationFactureComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,
-    private produitService: ProduitService) { }
+  constructor() { }
 
   @Output() createFactureEvent = new EventEmitter<any>();
-  liste !: Produit[];
-  id !: number;
+  liste : Produit[] = [];
 
   ngOnInit(): void {
-    this.id = Number(this.route.snapshot.paramMap.get('id')!);
-
-    this.produitService.getProduitFactureById(this.id).subscribe(
-      (data) => {
-        this.liste = data;
-        console.log(this.liste)
-      })
   }
 
   produit = {
