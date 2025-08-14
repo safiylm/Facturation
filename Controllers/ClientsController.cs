@@ -74,7 +74,11 @@ namespace Facturation.Controllers
             {
                 _context.Client.Add(client);
                await _context.SaveChangesAsync();
-                return Ok(new { message = "Created with success" });
+                    return Ok(new
+                {
+                    message = "Client created successfully",
+                    id = client.Id // << retourne l'ID ici
+                });
             }
             return Ok(new { message = "ModelStat is not valid." });
         }
@@ -135,66 +139,4 @@ namespace Facturation.Controllers
         }
 
     }
-    /*
-        public class ClientsController : Controller
-        {
-          
-
-            // GET: Clients
-            public async Task<IActionResult> Index()
-            {
-                return _context.Client != null ?
-                            View(await _context.Client.ToListAsync()) :
-                            Problem("Entity set 'FacturationContext.Client'  is null.");
-            }
-
-            // GET: Clients/Details/5
-            public async Task<IActionResult> Details(string id)
-            {
-                if (id == null || _context.Client == null)
-                {
-                    return NotFound();
-                }
-
-                var client = await _context.Client
-                    .FirstOrDefaultAsync(m => m._id == id);
-                if (client == null)
-                {
-                    return NotFound();
-                }
-
-                return View(client);
-            }
-
-        
-           
-    
-
-            // POST: Clients/Edit/5
-            // To protect from overposting attacks, enable the specific properties you want to bind to.
-            // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-       
-
-            // GET: Clients/Delete/5
-            public async Task<IActionResult> Delete(string id)
-            {
-                if (id == null || _context.Client == null)
-                {
-                    return NotFound();
-                }
-
-                var client = await _context.Client
-                    .FirstOrDefaultAsync(m => m._id == id);
-                if (client == null)
-                {
-                    return NotFound();
-                }
-
-                return View(client);
-            }
-
-     
-
-        
-        }*/
 }
