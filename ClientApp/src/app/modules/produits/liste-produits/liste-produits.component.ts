@@ -10,7 +10,7 @@ import { Produit } from '../../../models/produit.model';
 export class ListeProduitsComponent implements OnInit {
 
   @Input() id!: number;
-  liste !: Produit[];
+  liste: Produit[] = [];
 
   constructor(private produitService: ProduitService) { }
 
@@ -18,8 +18,7 @@ export class ListeProduitsComponent implements OnInit {
     this.produitService.getProduitFactureById(this.id).subscribe(
       (data) => {
         this.liste = data;
-        console.log(this.liste)
-      }    )
+      })
   }
 
 }

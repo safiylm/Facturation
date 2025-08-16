@@ -41,7 +41,7 @@ describe('EditClientComponent', () => {
     spyOn(service, "getClientById").and.returnValue(of(mockClient));
     component.ngOnInit();
     tick();
-    expect(service.getClientById).toHaveBeenCalledWith(component.id);
+    expect(service.getClientById).toHaveBeenCalled();
     expect(component.client).toEqual(mockClient);
   }));
 

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GestionProduitsInEditFactureComponent } from './gestion-produits-in-edit-facture.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -6,10 +6,14 @@ import { CreateProduitComponent } from '../create-produit/create-produit.compone
 import { By } from '@angular/platform-browser';
 import { Produit } from 'src/app/models/produit.model';
 import { EditProduitComponent } from '../edit-produit/edit-produit.component';
+import * as exp from 'constants';
+import { of } from 'rxjs';
+import { ProduitService } from 'src/app/core/produit-service';
 
 describe('GestionProduitsInEditFactureComponent', () => {
   let component: GestionProduitsInEditFactureComponent;
   let fixture: ComponentFixture<GestionProduitsInEditFactureComponent>;
+  let service: ProduitService;//= jasmine.createSpyObj('ProduitService', ['getProduitFactureById']);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,6 +22,7 @@ describe('GestionProduitsInEditFactureComponent', () => {
     })
       .compileComponents();
 
+    service = TestBed.inject(ProduitService)
     fixture = TestBed.createComponent(GestionProduitsInEditFactureComponent);
     component = fixture.componentInstance;
     component.id = 12
@@ -30,7 +35,29 @@ describe('GestionProduitsInEditFactureComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.id).toBeDefined();
+
   })
+
+  it('should GET DATA FROM API', fakeAsync(() => {
+    const mockClient: Produit[] = [new Produit(1, 1, "PANTRTALON", 19, 0.99, Date.now.toString(), 4)];
+    spyOn(service, "getProduitFactureById").and.returnValue(of(mockClient));
+    component.ngOnInit();
+    tick();
+    expect(service.getProduitFactureById).toHaveBeenCalledWith(component.id);
+    expect(component.liste).toEqual(mockClient);
+
+    let totalHT = 0;
+    let totalTVA = 0
+    for (let prod of component.liste) {
+      totalTVA = totalTVA + prod.tva
+      totalHT = totalHT + prod.prixUnitaireHT
+    }
+    expect(component.totalHT).toBe(totalHT)
+    expect(component.totalTVA).toBe(totalTVA)
+  }));
+
+
 
   it('should get new element add in list from child component', () => {
     const childDebugEl = fixture.debugElement.query(By.css('app-create-produit')); // sélecteur correct
@@ -48,7 +75,18 @@ describe('GestionProduitsInEditFactureComponent', () => {
     expect(component.liste[0].prixUnitaireHT).toBe(9.0);
     expect(component.liste[0].tva).toBe(0.99);
     expect(component.liste[0].factureId).toBe(2);
+
+    let totalHT = 0;
+    let totalTVA = 0
+    for (let prod of component.liste) {
+      totalTVA = totalTVA + prod.tva
+      totalHT = totalHT + prod.prixUnitaireHT
+    }
+    expect(component.totalHT).toBe(totalHT)
+    expect(component.totalTVA).toBe(totalTVA)
   });
+
+
 
   it('should update liste with  element edited getting from child component', () => {
 
@@ -79,5 +117,25 @@ describe('GestionProduitsInEditFactureComponent', () => {
     expect(component.liste[0].prixUnitaireHT).toBe(9.0);
     expect(component.liste[0].tva).toBe(0.99);
     expect(component.liste[0].factureId).toBe(2);
+
+
+    let totalHT = 0;
+    let totalTVA = 0
+    for (let prod of component.liste) {
+      totalTVA = totalTVA + prod.tva
+      totalHT = totalHT + prod.prixUnitaireHT
+    }
+    expect(component.totalHT).toBe(totalHT)
+    expect(component.totalTVA).toBe(totalTVA)
   });
+
+
+  it('should SAVE MODIFICATIONS WITH SUCCESS', fakeAsync(() => {
+
+    let emittedValue: any | undefined;
+    component.editFactureEvent.subscribe(value => emittedValue = value);
+    component.save();
+    expect(emittedValue).not.toBeNull();
+    expect(emittedValue).toBeTruthy();
+  }));
 });

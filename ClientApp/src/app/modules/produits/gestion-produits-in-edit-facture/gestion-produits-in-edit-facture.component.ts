@@ -34,15 +34,6 @@ export class GestionProduitsInEditFactureComponent implements OnInit {
       })
   }
 
-  produit = {
-    quantite: 1,
-    designation: 'Iphone 16',
-    prixUnitaireHT: 900,
-    TVA: 99,
-    factureId: 2,
-    createdAt: new Date()
-  };
-
 
   add(produit: any) {
     this.liste.push(produit)
@@ -65,7 +56,6 @@ export class GestionProduitsInEditFactureComponent implements OnInit {
 
 
   save() {
-
     this.editFactureEvent.emit([this.liste, this.totalHT, this.totalTVA]);
   }
 
