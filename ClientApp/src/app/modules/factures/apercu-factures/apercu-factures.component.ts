@@ -22,7 +22,7 @@ export class ApercuFacturesComponent implements OnInit {
     this.factureService.getFactureById( this.id ).subscribe(
       (data) => {
        this.facture = data
-      }    )
+      })
   }
 
 }

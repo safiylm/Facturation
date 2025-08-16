@@ -57,6 +57,7 @@ describe('CreateFactureComponent', () => {
       factureId: idcreee,
       createdAt: new Date()
     }]
+
     spyOn(factureService, 'create').and.returnValue(of(
       {
         message: "Facture created successfully",

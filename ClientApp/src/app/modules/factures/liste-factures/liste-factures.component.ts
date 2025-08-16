@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from '../../../core/client-service';
 import { FactureService } from '../../../core/facture-service';
 import { Facture } from '../../../models/facture.model';
 
@@ -12,10 +11,10 @@ export class ListeFacturesComponent implements OnInit {
 
 
   liste !: Facture[];
-  resultat = "";
   searchFacture = ""
   totalFacture = 0
   factureEnAttente = 0
+
   constructor(private factureService: FactureService) { }
 
   ngOnInit(): void {
@@ -32,17 +31,15 @@ export class ListeFacturesComponent implements OnInit {
       }
       localStorage.setItem("factureEnAttente", this.factureEnAttente.toString())
       localStorage.setItem("totalFacture", this.totalFacture.toString())
-
-
     });
   }
 
   search() {
-    for (let fact of this.liste) {
+   /* for (let fact of this.liste) {
       if (this.searchFacture == fact.titre) {
 
       }
-    }
+    }*/
   }
 
 

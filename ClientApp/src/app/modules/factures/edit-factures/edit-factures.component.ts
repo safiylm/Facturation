@@ -14,7 +14,8 @@ import { Produit } from '../../../models/produit.model';
 export class EditFacturesComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private factureService: FactureService,
-private produitService: ProduitService  ) { }
+    private produitService: ProduitService) { }
+  resultat = "";
 
   facture!: Facture;
   listeProduit !: Produit[];
@@ -28,23 +29,23 @@ private produitService: ProduitService  ) { }
       })
   }
 
+  
   getProduits(liste: any) {
     console.log(liste);
     this.listeProduit = liste[0]
     this.facture.totalHT = liste[1]
     this.facture.totalTVA = liste[2]
-     this.factureService.edit(this.facture).subscribe(
-        (data) => {
-          console.log(data)
-         for (let prod of this.listeProduit) {
-            this.produitService.edit(prod).subscribe(
-              (data1) => {
-                console.log(data1)
-              })
-      
-          }
-     }    )
-   
+    this.factureService.edit(this.facture).subscribe(
+      (data) => {
+        console.log(data)
+        for (let prod of this.listeProduit) {
+          this.produitService.edit(prod).subscribe(
+            (data1) => {
+              this.resultat = data1.message
+            })
+        }
+      })
+
   }
 
 }
