@@ -1,10 +1,10 @@
-
 <div class="div-title d-flex align-items-center justify-content-between">
   <h1>Mes factures</h1>
-  <a href="/new-facture" id="a-add-new-facture">Créer une nouvelle facture</a>
+  <a href="facture/create" id="a-add-new-facture">Créer une nouvelle facture</a>
 
 </div>
-<input [(ngModel)]="searchFacture" name="searchFacture" class="form-control" placeholder="Recherche Client" (keyup.enter)="search()"/>
+<input [(ngModel)]="searchFacture" name="searchFacture" class="form-control" placeholder="Recherche Client"
+  (keyup.enter)="search()" />
 
 <div class="div-table" *ngIf="liste">
   <table class="table">
@@ -19,7 +19,11 @@
     <tbody>
 
       <tr *ngFor="let facture of liste">
-        <td>   <a href="edit-client/{{facture.clientId}}"><app-nom-client [id]="facture.clientId"></app-nom-client> </a></td>
+        <td>
+          <a href="client/edit/{{facture.clientId}}">
+            {{facture.clientId}}<app-nom-client [id]="facture.clientId"></app-nom-client>
+          </a>
+        </td>
         <td>
           {{ facture.status }}
         </td>

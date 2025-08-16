@@ -12,46 +12,46 @@ import { ListeProduitsComponent } from '../produits/liste-produits/liste-produit
 import { EditProduitComponent } from '../produits/edit-produit/edit-produit.component';
 import { CreateProduitComponent } from '../produits/create-produit/create-produit.component';
 import { SelectClientComponent } from '../clients/select-client/select-client.component';
-import { GestionProduitsComponent } from '../produits/gestion-produits/gestion-produits.component';
 import { NomClientComponent } from '../clients/nom-client/nom-client.component';
 import { GestionProduitsInCreationFactureComponent } from '../produits/gestion-produits-in-creation-facture/gestion-produits-in-creation-facture.component';
 import { GestionProduitsInEditFactureComponent } from '../produits/gestion-produits-in-edit-facture/gestion-produits-in-edit-facture.component';
 import { CreateClientComponent } from '../clients/create-client/create-client.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
   {
-    path: 'new-facture', component: CreateFactureComponent,
+    path: 'create', component: CreateFactureComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'edit-facture/:id', component: EditFacturesComponent,
+    path: 'edit/:id', component: EditFacturesComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'facture/:id', component: ApercuFacturesComponent,
+    path: ':id', component: ApercuFacturesComponent,
     canActivate: [AuthGuard],
   },
+  //   {
+  //   path: '/new-client', component: CreateClientComponent,
+  //   canActivate: [AuthGuard],
+  // },
 ];
 
 @NgModule({
   declarations: [
-    ApercuFacturesComponent, EditFacturesComponent, CreateFactureComponent,
+    ApercuFacturesComponent, EditFacturesComponent, 
+    CreateFactureComponent,
     DetailClientComponent, ListeProduitsComponent,
-
     EditProduitComponent,
     CreateProduitComponent,
-
     SelectClientComponent,
     CreateClientComponent,
-
-
-    GestionProduitsComponent,
     NomClientComponent,
     GestionProduitsInCreationFactureComponent,
     GestionProduitsInEditFactureComponent, 
   ],
   imports: [
-  
     FormsModule,
     CommonModule,
     RouterModule.forChild(routes),
