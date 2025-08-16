@@ -11,12 +11,12 @@ import { User } from '../../../models/user.model';
 export class EditUserComponent implements OnInit {
 
 
-  id !: string;
+  id !: number;
   resultat = "";
   user !: User;
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.id = Number( localStorage.getItem("userId")) ;
     this.userService.getUserById(Number(this.id)).subscribe(
       (user) => {
         this.user = user;
