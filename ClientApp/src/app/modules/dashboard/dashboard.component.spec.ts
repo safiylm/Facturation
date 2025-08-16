@@ -26,5 +26,8 @@ describe('DashboardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.factureEnAttente).toBeDefined();
+    expect(component.nbClients).toBeDefined();
+    expect(component.total).toBeDefined();
   });
 });
