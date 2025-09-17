@@ -32,63 +32,110 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Fournis un aperçu de l’organisation des fichiers et répertoires.
 
 Dossier racine du projet Angular
+
 /src
+
   /app
+
     /core          → services globaux (auth, api, interceptors)
+
     /shared        → composants partagés, pipes, directives
+
     /modules
+
       /clients     → CRUD clients
+
       /factures    → CRUD factures
+
       /produits    → CRUD produits
+
       /home        → page d'accueil
+
       /dashboard   → page d'accueil (user connected)
+
     /auth          → login, register
+
     /layout        → header, footer, sidebar
+
   /assets
+
   index.html
 
 
+
 Dossier du projet .NET Core MVC (backend)
+
   /Controllers 
+
   /Data
+
   /Migrations
+
   /Models
 
 
 ## 🔁 Communication Angular <-> API
 Format JSON via REST
 
+
 Exemples d’URL :
 
+
 GET /api/clients
+
 GET /api/clients/byAuteurId/5
+
 GET /api/clients/byId/5
+
 POST /api/clients/create
+
 POST /api/clients/create
+
 POST /api/clients/delete
 
 
+
+
 GET /api/factures
+
 GET /api/factures/byAuteurId/5
+
 POST /api/factures/byId/5
+
 POST /api/factures/create
+
 POST /api/factures/edit
+
 POST /api/factures/delete
 
 
+
+
 GET /api/produits
+
 GET /api/produits/byId/5
+
 GET /api/produits/byFactureId/5
+
 POST /api/produits/create
+
 POST /api/produits/edit
+
 POST /api/produits/delete
 
 
+
+
 GET /api/users
+
 GET /api/users/byId/5
+
 POST /api/users/login
+
 POST /api/users/create
+
 POST /api/users/edit
+
 POST /api/users/delete
 
 
