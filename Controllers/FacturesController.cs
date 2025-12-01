@@ -86,16 +86,16 @@ namespace Facturation.Controllers
             return Ok(new { message = "Facture ModelStat is not valid." });
         }
 
-   
- 
+
+
 
         // POST: Factures/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Route("edit")]
-       // [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit( [Bind("Id,ClientId,UserId,Titre,TotalTVA,TotalHT,Informations,CreatedAt")] FactureModel factureModel)
+        // [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([Bind("Id,ClientId,UserId,Titre,TotalTVA,TotalHT,Informations,CreatedAt")] FactureModel factureModel)
         {
 
             if (ModelState.IsValid)
@@ -109,7 +109,7 @@ namespace Facturation.Controllers
                 {
                     if (!FactureModelExists(factureModel.Id))
                     {
-                        return Ok(new { message ="id facture not founded" });
+                        return Ok(new { message = "id facture not founded" });
                     }
                     else
                     {
@@ -122,30 +122,38 @@ namespace Facturation.Controllers
         }
 
 
- 
+
 
         // POST: Factures/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [Route("delete")]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<object> DeleteConfirmed([FromBody] int id)
         {
             if (_context.Facture == null)
             {
                 return Problem("Entity set 'FacturationContext.FactureModel'  is null.");
             }
-            var factureModel = await _context.Facture.FindAsync(id);
-            if (factureModel != null) 
+            var factureModel = await _context.Facture
+                          .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (factureModel != null)
             {
                 _context.Facture.Remove(factureModel);
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Facture is deleted with success." });
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (factureModel == null)
+                return Ok(new { erreur = "Error, Facture is null!" + id });
+
+            return Ok(new { message = "Facture is NOT deleted with success." });
+
+
         }
 
         private bool FactureModelExists(int id)
         {
-          return (_context.Facture?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Facture?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
