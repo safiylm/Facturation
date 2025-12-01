@@ -23,13 +23,11 @@
 
   </div>
 
-
 </div>
 
 <div  *ngIf="facture" class="d-flex align-items-center justify-content-center">
   <a id="a-edit" href="facture/edit/{{facture.id}}">Edit </a> 
-  <button class="btn btn-primary">Télécharger </button>
-
-
+  <a id="a-edit" (click)="delete()">Delete </a> 
+  <button class="btn btn-primary" (click)="download()">Télécharger </button>
 </div>
 
