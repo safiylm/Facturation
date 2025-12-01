@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Facturation.Data;
 using Facturation.Models;
+using Microsoft.AspNetCore.Identity;
+using Humanizer;
 
 namespace Facturation.Controllers
 {
@@ -20,6 +22,7 @@ namespace Facturation.Controllers
     {
 
         private readonly FacturationContext _context;
+        private readonly PasswordHasher<UserModel> _passwordHasher = new PasswordHasher<UserModel>();
 
         public UsersController(FacturationContext context)
         {
@@ -71,16 +74,19 @@ namespace Facturation.Controllers
 
             var user = await _context.User
                 .FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
-
+            var result = _passwordHasher.VerifyHashedPassword(user, user.Password, loginRequest.Password);
             if (user == null)
             {
                 return Ok(new { success = false, message = "Utilisateur introuvable" });
             }
 
-            if (user.Password != loginRequest.Password)
-            {
+            if (result == PasswordVerificationResult.Failed)
                 return Ok(new { success = false, message = "Mot de passe incorrect" });
-            }
+
+               // return BadRequest("Mot de passe incorrect");
+
+           // if (user.Password != loginRequest.Password) {
+            
 
             return Ok(new
             {
@@ -101,13 +107,20 @@ namespace Facturation.Controllers
         public async Task<object> Create([Bind("Nom, Prenom, Email, Adresse, Phone, Password, CreatedAt")] 
         UserModel userModel)
         {
+
             if (ModelState.IsValid)
             {
+                userModel.Password = _passwordHasher.HashPassword(userModel, userModel.Password);
                 _context.User.Add(userModel);
                 await _context.SaveChangesAsync();
                 return Ok(new { message = "Created with success" });
             }
             return Ok(new { message = "User ModelStat is not valid." });
+        }
+
+        private object UserEmailExists()
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -119,7 +132,7 @@ namespace Facturation.Controllers
         // [ValidateAntiForgeryToken]
         public async Task<object> Edit(int id, [Bind("Id,Nom,Prenom,Email,Password, Adresse,Phone,CreatedAt")] UserModel userModel)
         {
-            if (userModel.Id!= null && ModelState.IsValid)
+            if ( ModelState.IsValid)
             {
                 try
                 {
@@ -148,8 +161,8 @@ namespace Facturation.Controllers
         [HttpPost, ActionName("Delete")] //
                    //  [ValidateAntiForgeryToken]
         [Route("delete")]
+        public async Task<object> DeleteConfirmed([FromBody] int id)
 
-        public async Task<object> DeleteConfirmed(int id)
         {
             if (_context.User == null)
             {
@@ -165,9 +178,8 @@ namespace Facturation.Controllers
 
             }
             if (userModel == null)
-            
-                return Ok(new { erreur = "Error, User is null!" });
-                return Ok(new { erreur = "Error, User Deleted!" });
+                return Ok(new { erreur = "Error, User is null!"+ id });
+            return Ok(new { erreur = "Error, User Deleted!" });
 
         }
 
@@ -176,6 +188,11 @@ namespace Facturation.Controllers
         private bool UserModelExists(int id)
         {
           return (_context.User?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private bool UserEmailExists(string email)
+        {
+            return (_context.User?.Any(e => e.Email == email)).GetValueOrDefault();
         }
     }
 }
