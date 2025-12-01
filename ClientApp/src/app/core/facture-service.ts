@@ -11,7 +11,7 @@ import { Facture } from '../models/facture.model';
 
 export class FactureService {
 
-  url = "http://localhost:64075"
+  url = "http://localhost:5293"
 
   constructor(private http: HttpClient) { }
 
@@ -20,10 +20,9 @@ export class FactureService {
     return this.http.get<Facture[]>(this.url + `/api/factures`);
   }
 
-  getFacturesByAuteurId(id: number ): Observable<Facture[]> {
-    return this.http.get<Facture[]>(this.url + `/api/factures/byAuteurId?id=`+ id);
+  getFacturesByAuteurId(id: number): Observable<Facture[]> {
+    return this.http.get<Facture[]>(this.url + `/api/factures/byAuteurId?id=` + id);
   }
-
 
   create(facture: any): Observable<any> {
     return this.http.post(this.url + `/api/factures/create`,
@@ -31,8 +30,6 @@ export class FactureService {
   }
 
   edit(facture: Facture): Observable<any> {
-   // return this.http.post(this.url + `/api/factures/edit`,
-     // facture, { responseType: 'text' })
     return this.http.post(`${this.url}/api/factures/edit`, facture, { responseType: 'text' });
   }
 
@@ -42,7 +39,7 @@ export class FactureService {
   }
 
   getFactureById(id: number): Observable<Facture> {
-    return this.http.get<Facture>(this.url + `/api/factures/byId?id=`+id);
+    return this.http.get<Facture>(this.url + `/api/factures/byId?id=` + id);
   }
 
 }

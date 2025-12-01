@@ -11,7 +11,7 @@ import { Client } from '../models/client.model';
 
 export class ClientService {
 
-  url = "http://localhost:64075"
+  url = "http://localhost:5293"
 
   constructor(private http: HttpClient) { }
 
@@ -20,14 +20,17 @@ export class ClientService {
     return this.http.get<Client[]>(this.url + `/api/clients`);
   }
 
+  
   getClientsByAuteurId(id: number): Observable<Client[]> {
-    return this.http.get<Client[]>(this.url + `/api/clients/byAuteurId?id=`+id);
+    return this.http.get<Client[]>(
+      `${this.url}/api/clients/byAuteurId?id=${id}`
+    );
   }
 
 
   create(client: any): Observable<any> {
     return this.http.post(this.url + `/api/clients/create`,
-      client, { responseType: 'text' } )
+      client, { responseType: 'text' })
   }
 
   edit(client: Client): Observable<any> {
@@ -41,7 +44,7 @@ export class ClientService {
   }
 
   getClientById(id: number): Observable<Client> {
-    return this.http.get<Client>(this.url + `/api/clients/byId?id=`+id);
+    return this.http.get<Client>(this.url + `/api/clients/byId?id=` + id);
   }
 
 }
