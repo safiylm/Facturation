@@ -10,6 +10,9 @@
   </div>
 
 
-  <app-gestion-produits-in-edit-facture  (editFactureEvent)="getProduits($event)"></app-gestion-produits-in-edit-facture>
-
+  <app-gestion-produits  (getProductsEvent)="getProduits($event)"></app-gestion-produits>
+      <div *ngIf="loading">loading</div>
+      <div *ngIf="result" class="resultat"> {{ result }} </div>
+      <div *ngIf="error"> {{ error }} </div>
+  
 </div>

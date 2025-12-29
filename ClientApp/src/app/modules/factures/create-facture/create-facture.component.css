@@ -1,6 +1,5 @@
 h1 {
-  background-color: #070850;
-  background-color: #366fed;
+  background-color: #1d315f;
   display: block;
   padding: 30px;
   text-align: center;
@@ -8,9 +7,10 @@ h1 {
   font-size: larger;
 }
 
-.progress-bar-etape{
-    margin:20px 0;
+.progress-bar-etape {
+  margin: 20px 0;
 }
+
 #facture {
   padding: 65px 55px;
   max-width: 800px;
@@ -33,10 +33,13 @@ h2 {
   border-bottom: 2px solid green;
 }
 
-label{ margin: 15px 0;}
+label {
+  margin: 15px 0;
+  width: 100%;
+}
 
 label input {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
 
@@ -57,7 +60,14 @@ label input {
   border: 1px solid #ebedef;
 }
 
-  .div-table th {
-    color: #737b8f;
-    font-weight: 500;
-  }
+.div-table th {
+  color: #737b8f;
+  font-weight: 500;
+}
+
+
+.resultat {
+  margin: 15px auto;
+  background-color: #c4dccab2;
+  padding: 20px;
+}

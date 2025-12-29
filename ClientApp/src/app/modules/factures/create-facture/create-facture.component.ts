@@ -10,15 +10,17 @@ import { ProduitService } from '../../../core/produit-service';
 export class CreateFactureComponent implements OnInit {
 
   constructor(
-    private factureService: FactureService, 
+    private factureService: FactureService,
     private produitService: ProduitService) { }
-  
-    listeProduits !: any;
-  resultat = ""
+
+  listeProduits !: any;
   clientchoix = "select"
   clientId = 0
   formProduitIsSubmit = false;
   currentDate = new Date();
+  result !: any;
+  loading = false;
+  error = '';
 
   ngOnInit(): void {
   }
@@ -33,7 +35,8 @@ export class CreateFactureComponent implements OnInit {
     titre: 'Facture ',
     totalTVA: 0,
     totalHT: 0,
-    remarques: "",
+    remarques: "Paiement en carte bancaire, en 4 fois.",
+    type: "standard",
     status: "En Attente",
     createdAt: new Date()
   };
@@ -48,20 +51,34 @@ export class CreateFactureComponent implements OnInit {
 
 
   save() {
+
+    this.loading = true;
+    this.error = '';
+    this.result = null;
+
     this.factureService.create(this.facture)
-      .subscribe(
-        (data) => {
-          for (let prod of this.listeProduits)
-            prod.factureId = data["id"];
+      .subscribe({
+          next: (data: any) => {
+          if (data["id"] != 0) {
+            for (let prod of this.listeProduits)
+              prod.factureId = data["id"];
 
-          this.produitService.create(this.listeProduits).subscribe(
-            (data1) => {
-              this.resultat = data1.message
-            })
-
-        }
+            this.produitService.create(this.listeProduits).subscribe(
+              (data1) => {
+                  this.loading = false;
+                this.result = data1.message
+                setTimeout(() => {
+                  document.location.href = 'facture/' + data["id"]
+                }, 2000)
+              })
+          }
+           }
+        ,
+        error: (err) => {
+          this.error = 'Erreur lors de la requête POST';
+          this.loading = false;
+        }}
       )
-
   }
 
   openCreateForm() {
