@@ -1,0 +1,93 @@
+<div class="container">
+    <h1>Création de devis</h1>
+
+    <div *ngIf="clientId==0 ">
+        <app-create-client (selectEvent)="openSelectForm()" *ngIf="clientchoix=='create'"
+            (getClientIDEvent)="getClientId($event)"></app-create-client>
+        <app-select-client (createEvent)="openCreateForm()" *ngIf="clientchoix=='select'"
+            (getClientIDEvent)="getClientId($event)"></app-select-client>
+    </div>
+
+
+    <div id="facture" *ngIf="clientId!=0" class="d-flex flex-column">
+
+        <div class="d-flex factureTop align-items-center justify-content-between">
+            <app-detail-client [id]="clientId"></app-detail-client>
+            <div>
+                <h2>FACTURE</h2>
+                <p>N° : 000X</p>
+                <p>Date: {{currentDate | date: 'dd/MM/yyyy'}}</p>
+            </div>
+        </div>
+
+
+        <div *ngIf=" !formProduitIsSubmit">
+            <app-gestion-produits *ngIf="clientId!=0" (getProductsEvent)="getProduits($event)">
+            </app-gestion-produits>
+        </div>
+
+
+    <section *ngIf="formProduitIsSubmit">
+
+        <div class="div-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Designation</th>
+                        <th scope="col">Quantite</th>
+                        <th scope="col">Total HT</th>
+                        <th scope="col">Total TVA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let produit of listeProduits">
+                        <td> {{ produit.designation }} </td>
+                        <td> {{ produit.quantite }} </td>
+                        <td> {{ produit.prixUnitaireHT }} </td>
+                        <td> {{ produit['tva'] }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="d-flex flex-column align-items-center justify-content-between">
+
+            <label>
+                Saisir le titre :
+                <input class="form-control" name="titre" [(ngModel)]="facture.titre" />
+            </label>
+
+            <label>
+                Saisir les inforations :
+                <input class="form-control" name="remarques" [(ngModel)]="facture.remarques" />
+            </label>
+
+
+            <label for="validite">Saisir la validité :</label>
+            <select class="form-control" name="cars" id="validite" [(ngModel)]="facture.validite">
+                <option value="un-mois" selected>1 mois</option>
+                <option value="un-mois">2 mois</option>
+
+            </select>
+
+
+
+            <div class="total">
+                <div>Total TVA : {{ facture.totalTVA}}€ </div>
+                <div>Total HT : {{ facture.totalHT }}€</div>
+                <div>Total TTC : {{ facture.totalHT + facture.totalTVA}}€</div>
+
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary" *ngIf="formProduitIsSubmit " (click)="save()">Créer votre facture </button>
+        <div *ngIf="loading">loading</div>
+        <div *ngIf="resultat" class="resultat"> {{ resultat }} </div>
+        <div *ngIf="error"> {{ error }} </div>
+    </section>
+
+    </div>
+
+</div>
