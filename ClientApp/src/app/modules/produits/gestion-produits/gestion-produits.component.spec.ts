@@ -1,24 +1,42 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { GestionProduitsInCreationFactureComponent } from './gestion-produits-in-creation-facture.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { CreateProduitComponent } from '../create-produit/create-produit.component';
-import { By } from '@angular/platform-browser';
-import { EditProduitComponent } from '../edit-produit/edit-produit.component';
-import { Produit } from 'src/app/models/produit.model';
 
-describe('GestionProduitsInCreationFactureComponent', () => {
-  let component: GestionProduitsInCreationFactureComponent;
-  let fixture: ComponentFixture<GestionProduitsInCreationFactureComponent>;
+import { GestionProduitsComponent } from './gestion-produits.component';
+import { CreateProduitComponent } from '../create-produit/create-produit.component';
+import { EditProduitComponent } from '../edit-produit/edit-produit.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Produit } from 'src/app/models/produit.model';
+import { By } from '@angular/platform-browser';
+
+describe('GestionProduitsComponent', () => {
+  let component: GestionProduitsComponent;
+  let fixture: ComponentFixture<GestionProduitsComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ GestionProduitsComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(GestionProduitsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
   beforeEach( () => {
     TestBed.configureTestingModule({
-      declarations: [GestionProduitsInCreationFactureComponent, CreateProduitComponent, EditProduitComponent],
+      declarations: [GestionProduitsComponent, CreateProduitComponent, EditProduitComponent],
       imports: [RouterTestingModule, HttpClientTestingModule]
     })
       .compileComponents();
  
-    fixture = TestBed.createComponent(GestionProduitsInCreationFactureComponent);
+    fixture = TestBed.createComponent(GestionProduitsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

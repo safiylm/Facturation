@@ -3,27 +3,26 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Designation</th>
+        <th scope="col">Designation </th>
         <th scope="col">Quantité</th>
         <th scope="col">Prix unitaire </th>
-        <th scope="col">Tva</th>
+        <th scope="col">Tva en %</th>
         <th scope="col"></th>
       </tr>
     </thead>
   </table>
-  <div>
+  <div style="padding-bottom: 30px;">
     <div *ngFor="let produit of liste;  index as i">
-
       <app-edit-produit [produit]="liste[i]" [index]="i" (editProduitEvent)="edit(i, $event)"></app-edit-produit>
-
     </div>
-
     <app-create-produit (createProduitEvent)="add($event)"></app-create-produit>
   </div>
 
-  <div>Total HT: {{ totalHT}}</div>
-  <div>Total TVA {{ totalTVA}}</div>
-  <button class="btn btn-primary " (click)="save()">Enregistrer les produits </button>
+  <div class="total">Total HT: <strong>{{ totalHT}}€ </strong> </div>
+  <div class="total">Total TVA: <strong>{{ totalTVA}}€</strong></div>
+  <div class="total">Total TTC: <strong>{{ totalHT + totalTVA }}€</strong></div>
+
+  <button class="btn btn-light " (click)="save()">Enregistrer les produits </button>
 
   </div>
 <!--<pre>{{ liste | json }}</pre>-->

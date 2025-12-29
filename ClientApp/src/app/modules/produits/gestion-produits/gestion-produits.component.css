@@ -1,0 +1,36 @@
+.div-table {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.div-table th {
+  color: #737b8f;
+  font-weight: 500;
+  min-width: 120px;
+}
+
+button {
+  margin: 20px auto;
+  display: block; 
+  border: 1.2px solid #0b1a42;
+}
+
+.total{
+  font-size: large;
+  line-height: 40px;
+}
+
+
+@media(max-width: 800px) {
+  .div-table {
+    padding: 5px;
+    overflow: scroll;
+  }
+
+  th {
+    min-width: 110px;
+  }
+
+
+}
