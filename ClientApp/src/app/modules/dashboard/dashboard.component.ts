@@ -6,20 +6,22 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent  {
+export class DashboardComponent {
 
 
   nbClients = localStorage.getItem("nbClients")
   factureEnAttente = localStorage.getItem("factureEnAttente")
   total = localStorage.getItem("totalFacture")
 
-  constructor(private route: Router) { }
+
   logout() {
     localStorage.setItem("isLoggedIn", "false")
     localStorage.setItem('userId', '');
+    localStorage.setItem('username', '');
+    localStorage.removeItem('username');
     localStorage.removeItem('userId')
-    localStorage.removeItem('token');
-    this.route.navigate(['/login']);
+    location.href = "auth/login"
+
   }
 
 }

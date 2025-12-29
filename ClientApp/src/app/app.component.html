@@ -4,3 +4,6 @@
     <router-outlet></router-outlet>
   </div>
 </body>
+
+<app-loading-spinner  [isVisible]="(loading$ | async)!"></app-loading-spinner>
+ <!-- -->

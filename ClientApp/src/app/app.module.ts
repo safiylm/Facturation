@@ -10,25 +10,36 @@ import { CommonModule } from '@angular/common';
 import { ListeFacturesComponent } from './modules/factures/liste-factures/liste-factures.component';
 import { ListeClientsComponent } from './modules/clients/liste-clients/liste-clients.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { ClientsResolverService } from './core/resolver/clients-resolver';
+import { FacturesResolverService } from './core/resolver/factures-resolver';
+import { NomClientComponent } from './modules/clients/nom-client/nom-client.component';
+import { ListeDevisComponent } from './modules/devis/liste-devis/liste-devis.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    ListeFacturesComponent, 
+    ListeFacturesComponent,
     ListeClientsComponent,
-    DashboardComponent
+    DashboardComponent,
+    NomClientComponent,
+    ListeDevisComponent
 
   ],
   imports: [
     BrowserModule, //.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule, 
+    HttpClientModule,
     FormsModule,
-   CommonModule, /* necessaire for ngModel */
+    CommonModule, /* necessaire for ngModel */
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-
+      {
+        path: '', component: HomeComponent, pathMatch: 'full',
+         resolve: {
+           clients: ClientsResolverService,
+           factures: FacturesResolverService ,
+         },
+      },
       {
         path: 'auth',
         loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
@@ -45,7 +56,7 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
       },
       {
         path: 'facture',
-        loadChildren: () => import('./modules/factures/facture.module').then(m => m.FactureModule)
+        loadChildren: () => import('./modules/factures/facture.module').then(m => m.FactureModule),
       },
 
     ])

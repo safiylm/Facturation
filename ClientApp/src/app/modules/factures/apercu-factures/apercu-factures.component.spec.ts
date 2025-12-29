@@ -35,7 +35,7 @@ describe('ApercuFacturesComponent', () => {
 
 
   it('should GET DATA FROM API', fakeAsync(() => {
-    const mockClient: Facture = new Facture(1, 2, 2, "XXX", 20, 100, "XXX", "En Attente", new Date );
+    const mockClient: Facture = new Facture(1, 2, 2, "XXX", 20, 100, "XXX", "En Attente", "standart",new Date );
     spyOn(service, "getFactureById").and.returnValue(of(mockClient));
     component.ngOnInit();
     tick();

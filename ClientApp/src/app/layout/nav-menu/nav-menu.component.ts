@@ -9,6 +9,7 @@ export class NavMenuComponent {
   isExpanded = false;
   isLoggedIn = false;
   userId = 0
+  username !:string | undefined ;
 
   collapse() {
     this.isExpanded = false;
@@ -22,10 +23,14 @@ export class NavMenuComponent {
     if (window.localStorage.getItem('isLoggedIn') == "true") {
       this.isLoggedIn = true;
       this.userId = Number(window.localStorage.getItem('userId'))
+      this.username = localStorage.getItem('username')?.toString();
+
     } else {
       this.isLoggedIn = false;
     }
 
   }
+
+
 
 }

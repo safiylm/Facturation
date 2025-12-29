@@ -26,12 +26,13 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
 
-
           <li *ngIf="!isLoggedIn" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/auth/login']">Login</a>
           </li>
 
-          {{ userId }}
+           <li *ngIf="isLoggedIn" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/user?id=' + userId]">{{ username }} </a>
+          </li>
 
         </ul>
       </div>

@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from '../../auth/auth.guard';
 import { EditClientComponent } from './edit-client/edit-client.component';
-
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 const routes: Routes = [
   //{
   //  path: 'new', component: CreateClientComponent,
@@ -21,7 +21,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     EditClientComponent,
-   // CreateClientComponent
+     // BrowserAnimationsModule,
+   // NgxSpinnerModule,
+   // CreateClientCompon
   ],
   imports: [
   

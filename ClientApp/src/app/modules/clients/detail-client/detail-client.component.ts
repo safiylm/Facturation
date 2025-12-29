@@ -19,6 +19,7 @@ export class DetailClientComponent implements OnInit {
         this.client = client;
       }
     )
+    this.client = new Client(4, "Jean", "Marie", 'marie@gmail.Com', 'rue du vivarais', "06 05 23 12 45", 12, "", "", 0)
   }
 
   constructor( private clientService: ClientService) {

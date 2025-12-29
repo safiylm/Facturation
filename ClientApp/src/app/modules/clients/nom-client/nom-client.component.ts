@@ -8,16 +8,16 @@ import { ClientService } from '../../../core/client-service';
 })
 export class NomClientComponent implements OnInit {
 
-  @Input() id !: number;
+  @Input() id: number = 13;
   constructor(private clientService: ClientService) { }
   nom = ""
 
   ngOnInit(): void {
     this.clientService.getClientById(Number(this.id)).subscribe(
       (data) => {
-        if(data){
-        this.nom = data.prenom+" "+ data.nom
-      console.log(this.nom)}
+        if (data) {
+          this.nom = data.prenom + " " + data.nom
+        }
       }
     )
   }

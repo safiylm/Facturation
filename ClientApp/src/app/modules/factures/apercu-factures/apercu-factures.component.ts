@@ -15,6 +15,9 @@ export class ApercuFacturesComponent implements OnInit {
   constructor(private route: ActivatedRoute, private factureService: FactureService) { }
 
   facture!: Facture;
+  result !: any;
+  loading = false;
+  error = '';
 
   id !: number;
 
@@ -46,13 +49,27 @@ export class ApercuFacturesComponent implements OnInit {
   }
 
   delete() {
-    this.factureService.delete(this.id).subscribe(
-      (data) => {
-        if (data) {
-          if (data == '{"message":"Facture is deleted with success."}')
-            location.href = '/'
-        }
-      })
+    this.loading = true;
+    this.error = '';
+    this.result = null;
+
+    this.factureService.delete(this.id).subscribe({
+      next: (data: any) => {
+
+        console.log(data)
+        if (data.message == "Facture & Produit is deleted with success.")
+          this.loading = false;
+        this.result = data.message
+        setTimeout(() => {
+          location.href = '/'
+        }, 1000)
+      }
+      ,
+      error: (err) => {
+        this.error = 'Erreur lors de la requête POST';
+        this.loading = false;
+      }
+    })
   }
 
 }

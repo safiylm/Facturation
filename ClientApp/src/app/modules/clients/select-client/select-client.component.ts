@@ -22,6 +22,11 @@ export class SelectClientComponent implements OnInit {
       .subscribe((clients) => {
         this.liste = clients;
       });
+
+    const saved = sessionStorage.getItem('clientId');
+    if (saved) {
+      this.clientSelect = Number(saved);
+    }
   }
 
   openCreateForm() {
@@ -29,12 +34,25 @@ export class SelectClientComponent implements OnInit {
   }
 
 
-  select() {
-    this.resultat = "chargement";
-    setTimeout(() => {
-      this.resultat = "";
-      this.getClientIDEvent.emit(this.clientSelect);
-    }, 4000);
+  select_submit() {
+    if (this.clientSelect != 0) {
+      this.resultat = "chargement";
+      setTimeout(() => {
+        this.resultat = "";
+        this.getClientIDEvent.emit(this.clientSelect);
+      }, 1000);
+
+    } else
+      this.resultat = "Selectionner le client de votre choix.";
+
   }
+
+  select(id: number) {
+    if (id != 0) {
+      this.clientSelect = id
+      sessionStorage.setItem('clientId', id.toString())
+    }
+  }
+
 
 }

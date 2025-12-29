@@ -10,6 +10,7 @@ export class Facture {
     public totalHT: number,
     public remarques: string,
     public status: string,
+    public type: string, // standard, acompte, solde, avoir 
 
     public createdAt: Date,
                
