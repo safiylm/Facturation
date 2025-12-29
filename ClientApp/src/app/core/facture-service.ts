@@ -26,16 +26,16 @@ export class FactureService {
 
   create(facture: any): Observable<any> {
     return this.http.post(this.url + `/api/factures/create`,
-      facture, { responseType: 'text' })
+      facture)
   }
 
   edit(facture: Facture): Observable<any> {
-    return this.http.post(`${this.url}/api/factures/edit`, facture, { responseType: 'text' });
+    return this.http.post(`${this.url}/api/factures/edit`, facture);
   }
 
   delete(id: number): Observable<any> {
     return this.http.post(this.url + `/api/factures/delete`,
-      id, { responseType: 'text' })
+      id)
   }
 
   getFactureById(id: number): Observable<Facture> {

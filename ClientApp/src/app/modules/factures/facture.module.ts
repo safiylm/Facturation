@@ -12,44 +12,53 @@ import { ListeProduitsComponent } from '../produits/liste-produits/liste-produit
 import { EditProduitComponent } from '../produits/edit-produit/edit-produit.component';
 import { CreateProduitComponent } from '../produits/create-produit/create-produit.component';
 import { SelectClientComponent } from '../clients/select-client/select-client.component';
-import { NomClientComponent } from '../clients/nom-client/nom-client.component';
-import { GestionProduitsInCreationFactureComponent } from '../produits/gestion-produits-in-creation-facture/gestion-produits-in-creation-facture.component';
-import { GestionProduitsInEditFactureComponent } from '../produits/gestion-produits-in-edit-facture/gestion-produits-in-edit-facture.component';
+import { GestionProduitsComponent } from '../produits/gestion-produits/gestion-produits.component';
 import { CreateClientComponent } from '../clients/create-client/create-client.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
+import { EditDevisComponent } from '../devis/edit-devis/edit-devis.component';
+import { ApercuDevisComponent } from '../devis/apercu-devis/apercu-devis.component';
+import { CreateDevisComponent } from '../devis/create-devis/create-devis.component';
 
 const routes: Routes = [
   {
-    path: 'create', component: CreateFactureComponent,
+    path: 'create-facture', component: CreateFactureComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'edit/:id', component: EditFacturesComponent,
+    path: 'edit-facture/:id', component: EditFacturesComponent,
+    canActivate: [AuthGuard],
+  }, {
+    path: 'create-devis', component: CreateDevisComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-devis/:id', component: EditDevisComponent,
+    canActivate: [AuthGuard],
+  },
+    {
+    path: 'devis/:id', component: ApercuDevisComponent,
     canActivate: [AuthGuard],
   },
   {
     path: ':id', component: ApercuFacturesComponent,
     canActivate: [AuthGuard],
   },
-  //   {
-  //   path: '/new-client', component: CreateClientComponent,
-  //   canActivate: [AuthGuard],
-  // },
+
+
 ];
 
 @NgModule({
   declarations: [
-    ApercuFacturesComponent, EditFacturesComponent, 
+    ApercuFacturesComponent, EditFacturesComponent,
     CreateFactureComponent,
     DetailClientComponent, ListeProduitsComponent,
     EditProduitComponent,
     CreateProduitComponent,
     SelectClientComponent,
     CreateClientComponent,
-    NomClientComponent,
-    GestionProduitsInCreationFactureComponent,
-    GestionProduitsInEditFactureComponent, 
+    GestionProduitsComponent,
+    EditDevisComponent,
+    ApercuDevisComponent,
+    CreateDevisComponent,
   ],
   imports: [
     FormsModule,

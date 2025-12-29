@@ -20,10 +20,10 @@ namespace Facturation.Models
         public double TotalHT { get; set; }
         public string Status { get; set; }
 
+        public string Type { get; set; } // standard, acompte, solde, avoir 
+
         public string Remarques { get; set; }
         public DateTime? CreatedAt { get; set; }
-
-
 
     }
 }

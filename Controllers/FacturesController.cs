@@ -70,7 +70,7 @@ namespace Facturation.Controllers
         [HttpPost]
         //   [ValidateAntiForgeryToken]
         [Route("create")]
-        public async Task<IActionResult> Create([Bind("ClientId,UserId,Titre,TotalTVA,TotalHT,Remarques, Status, CreatedAt")] FactureModel factureModel)
+        public async Task<IActionResult> Create([Bind("ClientId,UserId,Titre,TotalTVA,TotalHT,Remarques, Status,Type, CreatedAt")] FactureModel factureModel)
         {
 
             if (ModelState.IsValid)
@@ -95,7 +95,7 @@ namespace Facturation.Controllers
         [HttpPost]
         [Route("edit")]
         // [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("Id,ClientId,UserId,Titre,TotalTVA,TotalHT,Informations,CreatedAt")] FactureModel factureModel)
+        public async Task<IActionResult> Edit([Bind("Id,ClientId,UserId,Titre,TotalTVA,TotalHT,Remarques,CreatedAt")] FactureModel factureModel)
         {
 
             if (ModelState.IsValid)
@@ -137,11 +137,23 @@ namespace Facturation.Controllers
             var factureModel = await _context.Facture
                           .FirstOrDefaultAsync(m => m.Id == id);
 
+            var produitModel = await _context.Produit
+                .Where(m => m.FactureId == id).ToListAsync();
+            if (produitModel == null)
+            {
+                return NotFound();
+            }
+
+
             if (factureModel != null)
             {
                 _context.Facture.Remove(factureModel);
+                foreach(var prod in produitModel)
+                {
+                    _context.Produit.Remove(prod);
+                }
                 await _context.SaveChangesAsync();
-                return Ok(new { message = "Facture is deleted with success." });
+                return Ok(new { message = "Facture & Produit is deleted with success." });
             }
             if (factureModel == null)
                 return Ok(new { erreur = "Error, Facture is null!" + id });
