@@ -37,7 +37,7 @@ describe('EditClientComponent', () => {
 
   it('should GET DATA FROM API', fakeAsync(() => {
     component.id = "1"
-    const mockClient: Client = new Client(1, "Clara", "lea", "clara@exmaple.com", "ARBC", "rue emmanuelle Brigitte", "+0645892345", 1);
+    const mockClient: Client = new Client(1, "Clara", "lea", "clara@exmaple.com", "ARBC", "rue emmanuelle Brigitte", 1, "+0645892345", "", 1);
     spyOn(service, "getClientById").and.returnValue(of(mockClient));
     component.ngOnInit();
     tick();
@@ -48,8 +48,7 @@ describe('EditClientComponent', () => {
 
   it('should Edit CLIENT WITH SUCCESS', fakeAsync(() => {
 
-    component.client = new Client(1, "Clara", "lea", "clara@exmaple.com",
-      "ARBC", "rue emmanuelle Brigitte", "+0645892345", 1);
+    component.client = new Client(1, "Clara", "lea", "clara@exmaple.com", "ARBC", "rue emmanuelle Brigitte", 1, "+0645892345", "", 1);
     spyOn(service, 'edit').and
       .returnValue(of({ message: "Edited with success" }));
     component.edit();

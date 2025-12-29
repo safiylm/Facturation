@@ -30,17 +30,17 @@ export class ClientService {
 
   create(client: any): Observable<any> {
     return this.http.post(this.url + `/api/clients/create`,
-      client, { responseType: 'text' })
+      client)
   }
 
   edit(client: Client): Observable<any> {
     return this.http.post(this.url + `/api/clients/edit`,
-      client, { responseType: 'text' })
+      client)
   }
 
   delete(id: number): Observable<any> {
     return this.http.post(this.url + `/api/clients/delete`,
-      id, { responseType: 'text' })
+      id)
   }
 
   getClientById(id: number): Observable<Client> {

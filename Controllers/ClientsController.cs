@@ -67,7 +67,7 @@ namespace Facturation.Controllers
         //   [ValidateAntiForgeryToken]
         [Route("create")]
 
-        public async Task<object> CreateAsync([Bind("Nom,Prenom,Email,Adresse,Phone,CreatedAt")]
+        public async Task<object> CreateAsync([Bind("Nom,Prenom,Email,Adresse,Phone,CreatedAt, RaisonSocial, NumeroTVA, SIRET")]
           ClientModel client)
         {
             if (ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace Facturation.Controllers
         [HttpPost]
         [Route("edit")]
         // [ValidateAntiForgeryToken]
-        public async Task<object> Edit([Bind("Id,Nom,Prenom,Email,Adresse,Phone,CreatedAt")] ClientModel  client)
+        public async Task<object> Edit([Bind("Id,Nom,Prenom,Email,Adresse,Phone,CreatedAt,RaisonSocial, NumeroTVA, SIRET")] ClientModel  client)
         {          
 
             if (ModelState.IsValid)
@@ -114,10 +114,10 @@ namespace Facturation.Controllers
 
 
         // POST: Clients/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [Route("delete")]
       //  [ValidateAntiForgeryToken]
-        public async Task<object> DeleteConfirmed(int id)
+        public async Task<object> DeleteConfirmed([FromBody] int id )
         {
             if (_context.Client == null)
             {
@@ -127,11 +127,17 @@ namespace Facturation.Controllers
             if (client != null)
             {
                 _context.Client.Remove(client);
+                 await _context.SaveChangesAsync();
+                return Ok(new { message = "Client is deleted with success." });
             }
+            
+            if (client == null)
+                return Ok(new { erreur = "Error, Client is null!"+ id });
+          
+            
+            return Ok(new { message = "Client is NOT deleted with success." });
 
-            await _context.SaveChangesAsync();
-            return Ok(new { message = "Client is deleted with success." });
-        }
+ }
 
         private bool ClientExists(int id)
         {

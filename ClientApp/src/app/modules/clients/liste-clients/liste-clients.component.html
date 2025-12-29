@@ -1,8 +1,9 @@
 
 <div class="div-title d-flex align-items-center justify-content-between">
   <h1>Mes Clients</h1> 
-  <a href="/new-client" id="a-add-new-client">Créer une nouvelle client</a>
+  <!-- <a href="/new-client" id="a-add-new-client">Créer une nouvelle client</a> -->
 </div>
+
 <input [(ngModel)]="searchClient" name="searchClient"class="form-control" placeholder="Recherche Client"/>
 <div class="div-table">
 
@@ -17,15 +18,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let cli of liste">
-        <td><a href="client/edit/{{cli.id}}"> {{ cli['nom'] }} {{ cli.prenom }}</a> </td>
-        <td> {{ cli.email }} {{cli.auteurId}} </td>
+        <td><a href="client/edit/{{cli.id}}">  {{ cli.prenom }} {{ cli['nom'] }}</a> </td>
+        <td> {{ cli.email }} </td>
         <td> {{ cli.phone }} </td>
-        <td *ngIf="cli.entreprise!=''"> {{ cli.entreprise }}  </td>
-        <td *ngIf="cli.entreprise==''"> -  </td>
+        <td *ngIf="cli.raisonSocial!=''"> {{ cli.raisonSocial }}  </td>
+        <td *ngIf="cli.raisonSocial==''"> -  </td>
       </tr>
 
     </tbody>
   </table>
   </div>
 
-<!--<pre>{{ liste | json }}</pre>-->
+<!-- <pre>{{ liste | json }}</pre> -->

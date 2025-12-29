@@ -5,10 +5,12 @@ export class Client {
     public nom: string,
     public prenom: string,
     public email: string,
-    public entreprise: string ,
     public adresse: string,
     public phone: string,
     public auteurId: number,
-
+  
+    public raisonSocial: string,
+    public numeroTVA: string,
+    public siret: number,
   ) { }
 }

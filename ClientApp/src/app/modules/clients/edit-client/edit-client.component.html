@@ -1,5 +1,5 @@
 <form (ngSubmit)="edit()" autocomplete="off" *ngIf="client">
-  <h1>Edit Client  </h1>
+  <h1>Modifier le client </h1>
 
   <div class="row">
     <div class="col">
@@ -17,29 +17,84 @@
     </div>
   </div>
 
-  <label>
-    Saisissez le email:<br />
-    <input type="email" name="email" class="form-control" [(ngModel)]="client.email" />
-  </label>
+  <div class="row">
+    <div class="col">
+      <label>
+        Saisissez le email:<br />
+        <input type="email" name="email" class="form-control" [(ngModel)]="client.email" />
+      </label>
+    </div>
+    <div class="col">
+      <label>
+        Saisissez le numéro de téléphone:<br />
+        <input type="text" name="phone" class="form-control" [(ngModel)]="client.phone" />
+      </label>
+    </div>
 
-  <label>
-    Saisissez le nom de l'entreprise':<br />
-    <input type="text" name="entreprise" class="form-control" [(ngModel)]="client.entreprise" />
-  </label>
+  </div>
 
-  <label>
-    Saisissez le numéro de téléphone:<br />
-    <input type="text" name="phone" class="form-control" [(ngModel)]="client.phone" />
-  </label>
+  <div class="row">
 
-  <label>
-    Saisissez l'adresse:<br />
-    <input type="text" name="adresse" class="form-control" [(ngModel)]="client.adresse" />
-  </label>
+    <div class="col">
+      <label>
+        Saisissez l'adresse:<br />
+        <input type="text" name="adresse" class="form-control" [(ngModel)]="client.adresse" />
+      </label>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Edit </button>
+    <div class="col">
+      <label>
+        Saisissez le nom de l'entreprise:<br />
+        <input type="text" name="entreprise" class="form-control" [(ngModel)]="client.raisonSocial" />
+      </label>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class="col">
+      <label>
+        Saisissez le numéro de TVA:<br />
+        <input type="text" name="numeroTVA" class="form-control" [(ngModel)]="client.numeroTVA" />
+      </label>
+    </div>
+    <div class="col">
+      <label>
+        Saisissez le SIRET:<br />
+        <input type="number" name="siret" class="form-control" [(ngModel)]="client.siret" />
+      </label>
+    </div>
+  </div>
+
+
+  <div class="d-flex align-items-center justify-content-around">
+    <button type="submit" class="btn btn-light">Modifier le client </button>
+
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        .......
+      </button>
+      <ul class="dropdown-menu">
+        <li> <button (click)="delete()" class="dropdown-itembtn btn-da nger">Supprimer le client </button>
+        </li>
+      </ul>
+    </div>
+
+
+  </div>
+
+  <div *ngIf="loading" class="div-result">
+    <p>Chargement...</p>
+  </div>
+
+  <div class="div-result" *ngIf="error" style="color:red;">
+    <p>{{ error }}</p>
+  </div>
+
+  <div class="resultat" *ngIf="resultat">
+    <p>{{ resultat }}</p>
+  </div>
 
 </form>
-
-
-<button (click)="delete()" class="btn btn-danger">Delete</button>

@@ -1,5 +1,4 @@
-
-<div class="div-spinner" *ngIf="resultat!=''" @fadeIn @fadeOut>
+<div class="div-spinner" *ngIf="resultat!=''">
 
   <div *ngIf="resultat=='chargement'" class="d-flex align-items-center justify-content-center">
     <div class="spinner-border" role="status">
@@ -15,8 +14,18 @@
 </div>
 
 
-<form (ngSubmit)="create()" autocomplete="off">
-  <h1>Créer un nouveau client</h1>
+<form (ngSubmit)="create()" autocomplete="off" (change)="saveauto()">
+
+  <div class="d-flex align-items-center justify-content-start">
+
+    <button id="btnOpenSelectForm" class="btn btn-light" type="button" (click)="openSelectForm()"> <- Selectionner un
+        client</button>
+  </div>
+  <div class="d-flex align-items-center justify-content-center">
+
+    <h1>Créer un nouveau client</h1>
+  </div>
+
 
   <div class="row">
     <div class="col">
@@ -33,30 +42,67 @@
     </div>
   </div>
 
-  <label>
-    Saisissez le email:<br />
-    <input type="email" name="email" class="form-control" [(ngModel)]="client.Email" />
-  </label>
-
-  <label>
-    Saisissez le nom de l'entreprise':<br />
-    <input type="text" name="entreprise" class="form-control" [(ngModel)]="client.Entreprise" />
-  </label>
-
-  <label>
-    Saisissez le numéro de téléphone:<br />
-    <input type="text" name="phone" class="form-control" [(ngModel)]="client.Phone" />
-  </label>
-
-  <label>
-    Saisissez l'adresse:<br />
-    <input type="text" name="adresse" class="form-control" [(ngModel)]="client.Adresse" />
-  </label>
-  <div class="d-flex align-items-center justify-content-center">
-    <button type="submit" class="btn btn-primary">Créer </button>
-    <button id="btnOpenSelectForm" class="btn btn-light" type="button" (click)="openSelectForm()">Selectionner un client</button>
+  <div class="row">
+    <div class="col">
+      <label>
+        Saisissez le email:<br />
+        <input type="email" name="email" class="form-control" [(ngModel)]="client.Email" />
+      </label>
+    </div>
+    <div class="col">
+      <label>
+        Saisissez le numéro de téléphone:<br />
+        <input type="text" name="phone" class="form-control" [(ngModel)]="client.Phone" />
+      </label>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="col">
+      <label>
+        Saisissez l'adresse:<br />
+        <input type="text" name="adresse" class="form-control" [(ngModel)]="client.Adresse" />
+      </label>
+    </div>
+    <div class="col">
+      <label>
+        Saisissez le nom de l'entreprise:<br />
+        <input type="text" name="entreprise" class="form-control" [(ngModel)]="client.RaisonSocial" />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label>
+        Saisissez le numéro de TVA:<br />
+        <input type="text" name="entreprise" class="form-control" [(ngModel)]="client.NumeroTVA" />
+      </label>
+    </div>
+    <div class="col">
+      <label>
+        Saisissez le SIRET:<br />
+        <input type="number" name="entreprise" class="form-control" [(ngModel)]="client.SIRET" />
+      </label>
+    </div>
+  </div>
+
+
+
+  <div class="d-flex align-items-center justify-content-center">
+    <button type="submit" class="btn btn-light">Créer </button>
+  </div>
+
 </form>
 
-<p>{{ resultat }}</p>
+<div *ngIf="loading" class="div-result">
+  <p>Chargement...</p>
+</div>
 
+<div class="div-result" *ngIf="error" style="color:red;">
+  <p>{{ error }}</p>
+</div>
+
+<div class="div-result" *ngIf="resultat">
+  <p>{{ resultat }}</p>
+</div>
