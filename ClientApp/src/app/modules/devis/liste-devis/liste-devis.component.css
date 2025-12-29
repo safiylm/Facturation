@@ -1,0 +1,39 @@
+.div-title {
+  margin: 15px 0;
+  margin-top: 60px;
+}
+
+#a-add-new-facture {
+  display: inline-block;
+  text-align: right;
+  margin: 20px 0;
+  padding: 8px 16px;
+background-color: #cad8f5;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+
+.div-table {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #ebedef;
+}
+
+  .div-table th {
+    color: #737b8f;
+    font-weight: 500;
+    padding: 0 5px  20px 5px;
+  }
+
+
+input {
+  margin: 25px 0;
+  padding: 10px 20px;
+  border: 1px solid #ebedef;
+}
+
+a {
+  color: #365476 !important;
+}

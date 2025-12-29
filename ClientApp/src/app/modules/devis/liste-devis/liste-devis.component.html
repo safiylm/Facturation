@@ -1,0 +1,39 @@
+<div class="div-title d-flex align-items-center justify-content-between">
+  <h1>Mes Devis</h1>
+  <a href="facture/create-devis" id="a-add-new-facture">Créer un nouveau devis</a>
+</div>
+
+<input [(ngModel)]="searchDevis" name="searchFacture" class="form-control" placeholder="Recherche Devis"
+  (keyup.enter)="search()" />
+
+<div class="div-table" *ngIf="liste">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Client</th>
+        <th scope="col">Status</th>
+        <th scope="col">Totol TTC</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let facture of liste">
+        <td>  <app-nom-client [id]="facture.clientId" ></app-nom-client>
+        </td>
+        <td>
+          {{ facture.status }}
+        </td>
+        <td> {{ facture.totalTVA + facture.totalHT }}€ </td>
+        <td> {{ facture.createdAt | date: 'dd/MM/yyyy' }} </td>
+        <td> <a href="facture/devis/{{facture.id}}"> Voir le devis </a></td>
+
+      </tr>
+
+      <tr *ngIf="liste.length==0"> Aucune facture crée pour le moment </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!--<pre>{{ liste | json }}</pre>-->
