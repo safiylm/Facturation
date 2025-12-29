@@ -8,8 +8,8 @@
 # dependencies
 /node_modules
 /.angular
-.angular
-ClientApp/.angular
+/.angular/cache
+
 
 # IDEs and editors
 /.idea
