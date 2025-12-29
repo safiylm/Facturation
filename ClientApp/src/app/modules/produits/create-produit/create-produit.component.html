@@ -9,7 +9,11 @@
         <input type="number" name="prixUnitaireHT" class="form-control" [(ngModel)]="produit.prixUnitaireHT" />
       </td>
       <td>
-        <input type="number" name="TVA" class="form-control" [(ngModel)]="produit.tva" />
+            <select name="TVA" class="form-control" id="validite" [(ngModel)]="produit.tva">
+            <option value="5">5%</option>
+            <option value="10">10%</option>
+            <option value="20">20%</option>
+          </select>
       </td>
       <td  style="text-align: center; vertical-align: middle;">
         <button type="submit" class="btn btn-primary" (click)="addNewItem()">Ajouter </button>

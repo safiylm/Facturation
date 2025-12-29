@@ -15,10 +15,10 @@ export  class CreateProduitComponent{
 
   produit = {
     quantite: 1,
-    designation : 'PANTALON',
-    prixUnitaireHT: 9,
-    tva: .99,
-    factureId: 2,
+    designation : '',
+    prixUnitaireHT: 0,
+    tva: 0,
+    factureId: 0,
     createdAt: new Date()
   };
 

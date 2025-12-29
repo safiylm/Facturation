@@ -21,5 +21,6 @@ namespace Facturation.Data
         public DbSet<Facturation.Models.ProduitModel>? Produit { get; set; }
 
         public DbSet<Facturation.Models.FactureModel>? Facture { get; set; }
+        public DbSet<Facturation.Models.DevisModel>? Devis { get; set; }
     }
 }

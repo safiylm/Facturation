@@ -6,3 +6,12 @@ td{
 tr:first-child {
   min-width: 170px;
 }
+
+.form-control{
+    display: inherit !important;
+}
+
+.btn-primary{
+  background-color: #1d315f;
+  border : #1d315f;
+}

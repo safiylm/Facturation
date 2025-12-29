@@ -1,8 +1,20 @@
 ﻿using Facturation.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+// ✅ Ajouter CORS AVANT builder.Build()
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        policy => policy 
+    .WithOrigins("http://localhost:44496")  // ⚠️ Remplace par le vrai port Angular
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+    .AllowCredentials());
+
+});
+
 
 // Configuration de la DB
 builder.Services.AddDbContext<FacturationContext>(options =>
@@ -11,39 +23,26 @@ builder.Services.AddDbContext<FacturationContext>(options =>
         ?? throw new InvalidOperationException("Connection string 'FacturationContext' not found.")
     ));
 
-// ✅ Ajouter CORS AVANT builder.Build()
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngular",
-        policy => policy
-            .WithOrigins("http://localhost:44496")  // ⚠️ Remplace par le vrai port Angular
-            .AllowAnyHeader()
-            .AllowAnyMethod());
-});
+
 
 // Ajouter les contrôleurs
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Middleware
-if (!app.Environment.IsDevelopment())
-{
-    // éventuellement UseExceptionHandler ici
-}
 
-app.UseCors("AllowAngular"); // IMPORTANT : avant Authorization
-
+app.UseCors("AllowLocalhost"); // IMPORTANT : avant Authorization
+app.MapControllers();
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+//app.UseStaticFiles();
 app.UseRouting();
-app.UseAuthorization();
+//app.UseAuthorization();
 
 // Routes
 app.MapControllerRoute(
-    name: "default",
+   name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html");
+//app.MapFallbackToFile("index.html");
 
 app.Run();

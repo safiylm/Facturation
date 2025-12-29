@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FactureService } from '../../../core/facture-service';
 import { Facture } from '../../../models/facture.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-liste-factures',
@@ -15,7 +16,9 @@ export class ListeFacturesComponent implements OnInit {
   totalFacture = 0
   factureEnAttente = 0
 
-  constructor(private factureService: FactureService) { }
+  constructor(private factureService: FactureService,private route: ActivatedRoute) {
+    this.liste = this.route.snapshot.data['factures'];
+  }
 
   ngOnInit(): void {
 
@@ -32,14 +35,9 @@ export class ListeFacturesComponent implements OnInit {
       localStorage.setItem("factureEnAttente", this.factureEnAttente.toString())
       localStorage.setItem("totalFacture", this.totalFacture.toString())
     });
-  }
+ }
 
   search() {
-   /* for (let fact of this.liste) {
-      if (this.searchFacture == fact.titre) {
-
-      }
-    }*/
   }
 
 

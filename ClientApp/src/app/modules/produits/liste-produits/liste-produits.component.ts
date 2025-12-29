@@ -19,6 +19,11 @@ export class ListeProduitsComponent implements OnInit {
       (data) => {
         this.liste = data;
       })
+
+      this.liste = [ new Produit(1, 3, "XXX", 80, 20, new Date() , 33), 
+         new Produit(1, 3, "XXX", 80, 20, new Date() , 33),  
+         new Produit(1, 3, "XXX", 80, 20, new Date() , 33),
+      ]
   }
 
 }
