@@ -1,0 +1,38 @@
+
+#devis{
+    max-width: 800px;
+    margin:50px auto;
+    padding : 60px 60px;
+    background-color: white;
+}
+
+.facturetitre{
+    margin: 40px 0;
+}
+
+.total{
+    margin: 40px 0;
+    text-align:right;
+    line-height:35px;
+    font-size: 16px;
+}
+
+.devis-top {
+ margin: 50px 0 ;
+}
+
+#a-edit{
+    margin-right:20px;
+    border-radius:12px;
+    padding: 8px 16px;
+    background-color: white;
+    text-decoration:none;
+}
+
+
+
+.resultat {
+  margin: 15px auto;
+  background-color: #c4dccab2;
+  padding: 20px;
+}

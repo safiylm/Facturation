@@ -1,0 +1,37 @@
+<div id="devis" *ngIf="devis">
+  <div class="devis-top d-flex align-items-center justify-content-between">
+    <app-detail-client [id]="devis.clientId"></app-detail-client>
+
+    <div>
+      <h1>Devis</h1>
+      <p>N° : 000{{devis.id}}</p>
+      <p>Date: {{devis.createdAt | date: 'dd/MM/yyyy'}}</p>
+    </div>
+  </div>
+
+  <!--<div class="devistitre">
+    <div>{{ devis.titre }} </div>
+    <div>{{ devis.informations }} </div>
+  </div>-->
+
+  <app-liste-produits [id]="devis.id"></app-liste-produits>
+
+  <div class="total">
+    <div>Total TVA : {{ devis.totalTVA}}€ </div>
+    <div>Total HT : {{ devis.totalHT }}€</div>
+    <div>Total TTC : {{ devis.totalHT + devis.totalTVA}}€</div>
+
+  </div>
+
+</div>
+
+<div *ngIf="loading">loading</div>
+<div *ngIf="result" class="resultat"> {{ result }} </div>
+<div *ngIf="error"> {{ error }} </div>
+
+
+<div *ngIf="devis" class="d-flex align-items-center justify-content-center">
+  <a id="a-edit" href="facture/edit-devis/{{devis.id}}">Edit </a>
+  <a id="a-edit" (click)="delete()">Delete </a>
+  <button class="btn btn-primary" (click)="download()">Télécharger </button>
+</div>
