@@ -17,7 +17,6 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent],
       imports: [RouterTestingModule,
         HttpClientTestingModule, CommonModule],
-
     })
       .compileComponents();
 

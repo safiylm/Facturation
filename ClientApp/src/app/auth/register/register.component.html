@@ -31,8 +31,6 @@
     </div>
   </div>
 
-
-
   <div class="row">
     <div class="col">
       <label>
@@ -43,10 +41,45 @@
     <div class="col">
       <label>
         Saisissez votre numero de téléphone:<br />
-        <input type="number" name="phone" class="form-control" [(ngModel)]="user.Phone">
+        <input type="text" name="phone" class="form-control" [(ngModel)]="user.Phone">
       </label>
     </div>
   </div>
 
+    <div class="row">
+    <div class="col">
+      <label>
+        Saisissez votre raison social:<br />
+        <input type="text" name="raisonSocial" class="form-control" [(ngModel)]="user.RaisonSocial">
+      </label>
+    </div>
+    <div class="col">
+      <label>
+        Saisissez votre numero de TVA:<br />
+        <input type="text" name="ntva" class="form-control" [(ngModel)]="user.NumeroTVA">
+      </label>
+    </div>
+  </div>
+
+      <div class="col">
+      <label>
+        Saisissez votre SIRET:<br />
+        <input type="text" name="siret" class="form-control" [(ngModel)]="user.SIRET">
+      </label>
+    </div>
+
   <button type="submit" class="btn btn-dark">S'inscrire </button>
+
+
+  <div *ngIf="loading" class="div-result" ><p>Chargement...</p></div>
+
+  <div class="div-result" *ngIf="error" style="color:red;">
+   <p>{{ error }}</p> 
+  </div>
+
+  <div class="div-result" *ngIf="result">
+    <p>{{ result }}</p> 
+  </div>
+
+
 </form>

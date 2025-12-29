@@ -92,7 +92,7 @@ namespace Facturation.Controllers
             {
                 success = true,
                 message = "Connexion réussie",
-                utilisateur = new { user.Id, user.Email }
+                utilisateur = user
             });
         }
 
@@ -104,7 +104,7 @@ namespace Facturation.Controllers
         [HttpPost]
         [Route("create")]
         // [ValidateAntiForgeryToken]
-        public async Task<object> Create([Bind("Nom, Prenom, Email, Adresse, Phone, Password, CreatedAt")] 
+        public async Task<object> Create([Bind("Nom, Prenom, Email, Adresse, Phone, Password, RaisonSocial, NumeroTVA, SIRET, CreatedAt")] 
         UserModel userModel)
         {
 
@@ -113,7 +113,7 @@ namespace Facturation.Controllers
                 userModel.Password = _passwordHasher.HashPassword(userModel, userModel.Password);
                 _context.User.Add(userModel);
                 await _context.SaveChangesAsync();
-                return Ok(new { message = "Created with success" });
+                return Ok(new { message = "User Created with success", user = userModel });
             }
             return Ok(new { message = "User ModelStat is not valid." });
         }

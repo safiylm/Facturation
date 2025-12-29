@@ -22,7 +22,12 @@ namespace Facturation.Models
         public string Adresse { get; set; }
         
         public string? Phone { get; set; }
+
+        public string RaisonSocial { get; set; }
+        public string NumeroTVA { get; set; }
+        public int SIRET { get; set; }
         public DateTime? CreatedAt { get; set; }
+
     
 
     }

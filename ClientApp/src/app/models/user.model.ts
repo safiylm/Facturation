@@ -8,6 +8,8 @@ export class User {
     public password: string,
     public adresse: string,
     public phone: string,
-
+    public raisonSocial: string,
+    public numeroTVA: string,
+    public SIRET: number,
   ) { }
 }

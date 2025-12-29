@@ -8,38 +8,49 @@ import { User } from '../../models/user.model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  email = "jean@example.com";
-  password = "jean@example.com";
+  email = "azra@gmail.com";
+  password = "123";
 
   constructor(private userService: UserService,
     private route: Router) { }
 
-
   liste !: User[];
-  resultat = "";
+  result !: any;
+  loading = false;
+  error = '';
 
-  ngOnInit(): void {
-
-  }
 
   login() {
+    this.loading = true;
+    this.error = '';
+    this.result = null;
 
-    this.userService.login(this.email, this.password).subscribe(
-      (data: any) => {
-        if (data) {
-          this.resultat = data.message
-          if (data.success == true) {
-            localStorage.setItem('userId', data.utilisateur.id);
-            localStorage.setItem('isLoggedIn', "true");
-            this.route.navigate(['/']);
-
+    setTimeout(() => {
+      this.userService.login(this.email, this.password).subscribe({
+        next: (data: any) => {
+          if (data) {
+            this.loading = false;
+            this.result = data.message
+            if (data.success == true) {
+              localStorage.setItem('userId', data.utilisateur.id);
+              localStorage.setItem('username', data.utilisateur.prenom + " " + data.utilisateur.nom);
+              localStorage.setItem('isLoggedIn', "true");
+              setTimeout(() => {
+                location.href = "/"
+              }, 1500)
+            }
           }
-        }
+        },
+        error: (err) => {
+          this.error = 'Erreur lors de la requête POST';
+          this.loading = false;
+        },
       }
-    )
-  }
+      )
+    }, 1500)
 
+  }
 
 }

@@ -11,7 +11,7 @@ import { User } from '../models/user.model';
 
 export class UserService {
 
-  url = "http://localhost:64075"
+  url = "http://localhost:5293"
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +23,7 @@ export class UserService {
 
   create(user: any): Observable<any> {
     return this.http.post(this.url + `/api/users/create`,
-      user, { responseType: 'text' } )
+      user )
   }
 
   edit(user: User): Observable<any> {
@@ -34,7 +34,7 @@ export class UserService {
 
   delete(id: number): Observable<any> {
     return this.http.post(this.url + `/api/users/delete`,
-      id, { responseType: 'text' })
+       id, { responseType: 'text' })
   }
 
   getUserById(id: number): Observable<User> {
