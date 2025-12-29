@@ -1,0 +1,18 @@
+<div id="devis" *ngIf="devis">
+  <div class="devis-top d-flex align-items-center justify-content-between">
+    <app-detail-client [id]="devis.clientId"></app-detail-client>
+
+    <div>
+      <h1>devis</h1>
+      <p>N° : 000{{devis.id}}</p>
+      <p>Date: {{devis.createdAt  | date: 'dd/MM/yyyy'}}</p>
+    </div>
+  </div>
+
+
+  <app-gestion-produits  (getProductsEvent)="getProduits($event)"></app-gestion-produits>
+        <div *ngIf="loading">loading</div>
+        <div *ngIf="resultat" class="resultat"> {{ resultat }} </div>
+        <div *ngIf="error"> {{ error }} </div>
+   
+</div>
